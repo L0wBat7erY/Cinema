@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		5BE8986E75F5CEB94609D0D8 /* Pods_CinemaBao.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66B7194360DB467C479B1DC4 /* Pods_CinemaBao.framework */; };
+		9A0F2B7E21588A0D000529D5 /* CustomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F2B7D21588A0D000529D5 /* CustomViewCell.swift */; };
+		9A0F2B8021588C5C000529D5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F2B7F21588C5C000529D5 /* SignInViewController.swift */; };
+		9A0F2B8221588CAD000529D5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F2B8121588CAD000529D5 /* SignUpViewController.swift */; };
+		9A0F2B862158CC76000529D5 /* FilmList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F2B852158CC76000529D5 /* FilmList.swift */; };
+		9A0F2B882158CC8E000529D5 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F2B872158CC8E000529D5 /* Movie.swift */; };
+		9A0F2B8A2158CCA2000529D5 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F2B892158CCA2000529D5 /* UserInfo.swift */; };
 		9AA7AF44215881A200948384 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA7AF43215881A200948384 /* AppDelegate.swift */; };
 		9AA7AF46215881A200948384 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA7AF45215881A200948384 /* ViewController.swift */; };
 		9AA7AF49215881A200948384 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AA7AF47215881A200948384 /* Main.storyboard */; };
@@ -18,6 +24,12 @@
 /* Begin PBXFileReference section */
 		3FAEA1A0F06699C4564B4C12 /* Pods-CinemaBao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CinemaBao.release.xcconfig"; path = "Target Support Files/Pods-CinemaBao/Pods-CinemaBao.release.xcconfig"; sourceTree = "<group>"; };
 		66B7194360DB467C479B1DC4 /* Pods_CinemaBao.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CinemaBao.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A0F2B7D21588A0D000529D5 /* CustomViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewCell.swift; sourceTree = "<group>"; };
+		9A0F2B7F21588C5C000529D5 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		9A0F2B8121588CAD000529D5 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		9A0F2B852158CC76000529D5 /* FilmList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmList.swift; sourceTree = "<group>"; };
+		9A0F2B872158CC8E000529D5 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		9A0F2B892158CCA2000529D5 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		9AA7AF40215881A200948384 /* CinemaBao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CinemaBao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AA7AF43215881A200948384 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9AA7AF45215881A200948384 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +79,12 @@
 				9AA7AF4A215881A300948384 /* Assets.xcassets */,
 				9AA7AF4C215881A300948384 /* LaunchScreen.storyboard */,
 				9AA7AF4F215881A300948384 /* Info.plist */,
+				9A0F2B7D21588A0D000529D5 /* CustomViewCell.swift */,
+				9A0F2B7F21588C5C000529D5 /* SignInViewController.swift */,
+				9A0F2B8121588CAD000529D5 /* SignUpViewController.swift */,
+				9A0F2B852158CC76000529D5 /* FilmList.swift */,
+				9A0F2B872158CC8E000529D5 /* Movie.swift */,
+				9A0F2B892158CCA2000529D5 /* UserInfo.swift */,
 			);
 			path = CinemaBao;
 			sourceTree = "<group>";
@@ -77,7 +95,6 @@
 				EE450BE594A0076158E13935 /* Pods-CinemaBao.debug.xcconfig */,
 				3FAEA1A0F06699C4564B4C12 /* Pods-CinemaBao.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -163,8 +180,6 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CinemaBao/Pods-CinemaBao-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
@@ -175,8 +190,6 @@
 				"${BUILT_PRODUCTS_DIR}/Toaster/Toaster.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BFPaperButton.framework",
@@ -195,15 +208,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-CinemaBao-checkManifestLockResult.txt",
 			);
@@ -219,8 +228,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A0F2B882158CC8E000529D5 /* Movie.swift in Sources */,
+				9A0F2B8021588C5C000529D5 /* SignInViewController.swift in Sources */,
 				9AA7AF46215881A200948384 /* ViewController.swift in Sources */,
+				9A0F2B8221588CAD000529D5 /* SignUpViewController.swift in Sources */,
+				9A0F2B7E21588A0D000529D5 /* CustomViewCell.swift in Sources */,
+				9A0F2B862158CC76000529D5 /* FilmList.swift in Sources */,
 				9AA7AF44215881A200948384 /* AppDelegate.swift in Sources */,
+				9A0F2B8A2158CCA2000529D5 /* UserInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
