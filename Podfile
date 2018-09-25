@@ -12,5 +12,7 @@ target 'CinemaBao' do
     pod 'HSDatePickerViewController'
     pod 'BFPaperButton'
     pod 'FontAwesome.swift'
+    pod 'AlamofireImage', '~> 3.4'
+    
 
 end

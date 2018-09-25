@@ -8,15 +8,33 @@
 
 import UIKit
 import FontAwesome_swift
+import Toaster
 
 class SignInViewController: UIViewController {
 
     @IBOutlet weak var iconPassWord: UIImageView!
     @IBOutlet weak var iconEmailLogin: UIImageView!
+    @IBOutlet weak var txtEmailSignIn: UITextField!
+    @IBOutlet weak var txtPasswordSignIN: UITextField!
+    
     
     @IBAction func loginSuccessListMovie(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let loginSuccessVC = storyboard.instantiateViewController(withIdentifier: "ViewController")
+        
+        if txtEmailSignIn.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
+            let toast = Toast(text: "Vui lòng nhập Email")
+            toast.show()
+            
+            return
+        }
+        if txtPasswordSignIN.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
+            let toast = Toast(text: "Vui lòng nhập email")
+            toast.show()
+            
+            return
+        }
+        
         self.present(loginSuccessVC, animated: true, completion: nil)
         
     }
@@ -27,6 +45,9 @@ class SignInViewController: UIViewController {
         let signupVC = storyboard.instantiateViewController(withIdentifier: "SignUpViewController")
         self.present(signupVC, animated: true, completion: nil)
     }
+
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

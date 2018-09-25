@@ -8,6 +8,7 @@
 
 import UIKit
 import FontAwesome_swift
+import PullToRefresh
 
 class CustomViewCell: UITableViewCell {
 
@@ -25,7 +26,7 @@ class CustomViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        iconTheLoai.image = UIImage.fontAwesomeIcon(name: .camera, style: .solid, textColor: .green, size: CGSize(width: 30, height: 30))
+        iconTheLoai.image = UIImage.fontAwesomeIcon(name: .video, style: .solid, textColor: .green, size: CGSize(width: 30, height: 30))
         iconIDMovie.image = UIImage.fontAwesomeIcon(name: .info, style: .solid, textColor: .green, size: CGSize(width: 30, height: 30))
         iconReleaseDate.image = UIImage.fontAwesomeIcon(name: .calendar, style: .solid, textColor: .green, size: CGSize(width: 30, height: 30))
     }
@@ -40,6 +41,7 @@ class CustomViewCell: UITableViewCell {
         idPhim.text = movie._id
         theLoai.text = movie.genre
         tenPhim.text = movie.name
+        //profileMovie.image = movie.posterURL
     }
     
     
