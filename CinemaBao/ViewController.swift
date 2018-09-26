@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import AlamofireImage
 import PullToRefresh
+import MobileCoreServices
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -20,6 +21,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     private var number = 0
     
     var danhsachphim =  [Movie]()
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return danhsachphim.count
@@ -42,6 +44,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     }
                 })
             }
+            
+            
         }
     
         return cell
@@ -49,6 +53,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+    
+    
+//    let btn = UIButton(type: .custom)
+//    btn.frame = CGRect(x: 285, y: 485, width: 100, height: 100)
     
 
     override func viewDidLoad() {
@@ -78,6 +86,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     
+    
+    
     func fetchData() {
         //refreah
         
@@ -89,7 +99,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         print("Error")
                         return
                     }
-                    
+            
+            
+            
                     self.danhsachphim = listFilm.films
                     print(self.danhsachphim[0]._id)
                     
@@ -100,11 +112,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     self.refreshControl.endRefreshing()
             }
         }
-        
-        
-        
-        
     }
+        
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

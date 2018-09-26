@@ -17,6 +17,8 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var txtEmailSignIn: UITextField!
     @IBOutlet weak var txtPasswordSignIN: UITextField!
     
+//    let token = UserDefaults.standard
+    
     
     @IBAction func loginSuccessListMovie(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -29,11 +31,13 @@ class SignInViewController: UIViewController {
             return
         }
         if txtPasswordSignIN.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
-            let toast = Toast(text: "Vui lòng nhập email")
+            let toast = Toast(text: "Vui lòng nhập Password")
             toast.show()
             
             return
         }
+        
+        
         
         self.present(loginSuccessVC, animated: true, completion: nil)
         
@@ -46,14 +50,21 @@ class SignInViewController: UIViewController {
         self.present(signupVC, animated: true, completion: nil)
     }
 
+    @IBAction func resetPasswordSignIn(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let resetPasswordVC = storyboard.instantiateViewController(withIdentifier: "ResetPassWord")
+        self.present(resetPasswordVC, animated: true, completion: nil)
+    }
+    
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        iconPassWord.image = UIImage.fontAwesomeIcon(name: .lock, style: .solid, textColor: .black, size: CGSize(width: 30, height: 30))
+        iconPassWord.image = UIImage.fontAwesomeIcon(name: .lock, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
         
-        iconEmailLogin.image = UIImage.fontAwesomeIcon(name: .envelope, style: .solid, textColor: .black, size: CGSize(width: 30, height: 30))
+        iconEmailLogin.image = UIImage.fontAwesomeIcon(name: .envelope, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
+        
 
         // Do any additional setup after loading the view.
     }

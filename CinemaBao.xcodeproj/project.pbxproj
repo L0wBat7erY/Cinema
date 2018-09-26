@@ -19,6 +19,19 @@
 		9AA7AF49215881A200948384 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AA7AF47215881A200948384 /* Main.storyboard */; };
 		9AA7AF4B215881A300948384 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AA7AF4A215881A300948384 /* Assets.xcassets */; };
 		9AA7AF4E215881A300948384 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AA7AF4C215881A300948384 /* LaunchScreen.storyboard */; };
+		9AA86C23215B27EB00524048 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA86C19215B27E200524048 /* OpenSans-LightItalic.ttf */; };
+		9AA86C24215B27EB00524048 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA86C1A215B27E300524048 /* OpenSans-Regular.ttf */; };
+		9AA86C25215B27EB00524048 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA86C1B215B27E400524048 /* OpenSans-BoldItalic.ttf */; };
+		9AA86C26215B27EB00524048 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA86C1C215B27E400524048 /* OpenSans-ExtraBold.ttf */; };
+		9AA86C27215B27EB00524048 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA86C1D215B27E500524048 /* OpenSans-Light.ttf */; };
+		9AA86C28215B27EB00524048 /* OpenSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA86C1E215B27E600524048 /* OpenSans-SemiBoldItalic.ttf */; };
+		9AA86C29215B27EB00524048 /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA86C1F215B27E700524048 /* OpenSans-ExtraBoldItalic.ttf */; };
+		9AA86C2A215B27EB00524048 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA86C20215B27E800524048 /* OpenSans-SemiBold.ttf */; };
+		9AA86C2B215B27EB00524048 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA86C21215B27E900524048 /* OpenSans-Bold.ttf */; };
+		9AA86C2C215B27EB00524048 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA86C22215B27EA00524048 /* OpenSans-Italic.ttf */; };
+		9ABB506A215A793B00A79740 /* AddNewMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABB5069215A793B00A79740 /* AddNewMovie.swift */; };
+		9ABB506C215A79E100A79740 /* FilmInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABB506B215A79E100A79740 /* FilmInfo.swift */; };
+		9ABB506E215A8B7E00A79740 /* ResetPassWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABB506D215A8B7E00A79740 /* ResetPassWord.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +50,19 @@
 		9AA7AF4A215881A300948384 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9AA7AF4D215881A300948384 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9AA7AF4F215881A300948384 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9AA86C19215B27E200524048 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		9AA86C1A215B27E300524048 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		9AA86C1B215B27E400524048 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		9AA86C1C215B27E400524048 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		9AA86C1D215B27E500524048 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		9AA86C1E215B27E600524048 /* OpenSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		9AA86C1F215B27E700524048 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		9AA86C20215B27E800524048 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		9AA86C21215B27E900524048 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		9AA86C22215B27EA00524048 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		9ABB5069215A793B00A79740 /* AddNewMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewMovie.swift; sourceTree = "<group>"; };
+		9ABB506B215A79E100A79740 /* FilmInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInfo.swift; sourceTree = "<group>"; };
+		9ABB506D215A8B7E00A79740 /* ResetPassWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassWord.swift; sourceTree = "<group>"; };
 		EE450BE594A0076158E13935 /* Pods-CinemaBao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CinemaBao.debug.xcconfig"; path = "Target Support Files/Pods-CinemaBao/Pods-CinemaBao.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +99,7 @@
 		9AA7AF42215881A200948384 /* CinemaBao */ = {
 			isa = PBXGroup;
 			children = (
+				9AA86C18215B27C300524048 /* FontGoogle */,
 				9AA7AF43215881A200948384 /* AppDelegate.swift */,
 				9AA7AF45215881A200948384 /* ViewController.swift */,
 				9AA7AF47215881A200948384 /* Main.storyboard */,
@@ -85,8 +112,28 @@
 				9A0F2B852158CC76000529D5 /* FilmList.swift */,
 				9A0F2B872158CC8E000529D5 /* Movie.swift */,
 				9A0F2B892158CCA2000529D5 /* UserInfo.swift */,
+				9ABB5069215A793B00A79740 /* AddNewMovie.swift */,
+				9ABB506B215A79E100A79740 /* FilmInfo.swift */,
+				9ABB506D215A8B7E00A79740 /* ResetPassWord.swift */,
 			);
 			path = CinemaBao;
+			sourceTree = "<group>";
+		};
+		9AA86C18215B27C300524048 /* FontGoogle */ = {
+			isa = PBXGroup;
+			children = (
+				9AA86C21215B27E900524048 /* OpenSans-Bold.ttf */,
+				9AA86C1B215B27E400524048 /* OpenSans-BoldItalic.ttf */,
+				9AA86C1C215B27E400524048 /* OpenSans-ExtraBold.ttf */,
+				9AA86C1F215B27E700524048 /* OpenSans-ExtraBoldItalic.ttf */,
+				9AA86C22215B27EA00524048 /* OpenSans-Italic.ttf */,
+				9AA86C1D215B27E500524048 /* OpenSans-Light.ttf */,
+				9AA86C19215B27E200524048 /* OpenSans-LightItalic.ttf */,
+				9AA86C1A215B27E300524048 /* OpenSans-Regular.ttf */,
+				9AA86C20215B27E800524048 /* OpenSans-SemiBold.ttf */,
+				9AA86C1E215B27E600524048 /* OpenSans-SemiBoldItalic.ttf */,
+			);
+			path = FontGoogle;
 			sourceTree = "<group>";
 		};
 		CB4E569BF693490C09FA53A9 /* Pods */ = {
@@ -166,8 +213,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AA86C28215B27EB00524048 /* OpenSans-SemiBoldItalic.ttf in Resources */,
+				9AA86C25215B27EB00524048 /* OpenSans-BoldItalic.ttf in Resources */,
+				9AA86C2B215B27EB00524048 /* OpenSans-Bold.ttf in Resources */,
+				9AA86C2A215B27EB00524048 /* OpenSans-SemiBold.ttf in Resources */,
+				9AA86C2C215B27EB00524048 /* OpenSans-Italic.ttf in Resources */,
+				9AA86C24215B27EB00524048 /* OpenSans-Regular.ttf in Resources */,
+				9AA86C27215B27EB00524048 /* OpenSans-Light.ttf in Resources */,
+				9AA86C26215B27EB00524048 /* OpenSans-ExtraBold.ttf in Resources */,
 				9AA7AF4E215881A300948384 /* LaunchScreen.storyboard in Resources */,
 				9AA7AF4B215881A300948384 /* Assets.xcassets in Resources */,
+				9AA86C29215B27EB00524048 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				9AA86C23215B27EB00524048 /* OpenSans-LightItalic.ttf in Resources */,
 				9AA7AF49215881A200948384 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,9 +289,12 @@
 			files = (
 				9A0F2B882158CC8E000529D5 /* Movie.swift in Sources */,
 				9A0F2B8021588C5C000529D5 /* SignInViewController.swift in Sources */,
+				9ABB506E215A8B7E00A79740 /* ResetPassWord.swift in Sources */,
 				9AA7AF46215881A200948384 /* ViewController.swift in Sources */,
 				9A0F2B8221588CAD000529D5 /* SignUpViewController.swift in Sources */,
 				9A0F2B7E21588A0D000529D5 /* CustomViewCell.swift in Sources */,
+				9ABB506C215A79E100A79740 /* FilmInfo.swift in Sources */,
+				9ABB506A215A793B00A79740 /* AddNewMovie.swift in Sources */,
 				9A0F2B862158CC76000529D5 /* FilmList.swift in Sources */,
 				9AA7AF44215881A200948384 /* AppDelegate.swift in Sources */,
 				9A0F2B8A2158CCA2000529D5 /* UserInfo.swift in Sources */,
