@@ -62,7 +62,7 @@ class SignInViewController: UIViewController {
                 }
                 if (infoSignIn.status == 404) {
 //                    self.present(loginSuccessVC, animated: true, completion: nil)
-                    let toast = Toast(text: "Sai tài khoản hoặc mật khẩu")
+                    let toast = Toast(text: infoSignIn.errorMessage)
                     toast.show()
                 }
                 

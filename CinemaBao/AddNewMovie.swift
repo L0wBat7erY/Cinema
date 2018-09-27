@@ -42,13 +42,30 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
         dismiss(animated: true, completion: nil)
     }
     
+ 
     
-    @IBAction func createMovieBtn(_ sender: Any) {
+    @IBAction func addMovieBtn(_ sender: Any) {
         if addNameMovie.text == "" {
-            print("Nhập tên phim")
-//            let
+            let toast = Toast(text: "Vui lòng nhập Tên phim")
+            toast.show()
+            return
         }
+        
+        let url = URL(string: "https://cinema-hatin.herokuapp.com/api/cinema")
+        let parameter = ["name": addNameMovie.text!, "gerne": addGenreMovie.text!, "releaseDate": addReleaseDate.text!, "content": addContent.text! ]
+        Alamofire.request(url!, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: {(response) in
+            switch response.result {
+            case .success:
+                print("Success")
+                let toast = Toast(text: "Đã tạo Phim thành công")
+                toast.show()
+            case .failure:
+                print("Fail")
+            }
+        })
+        
     }
+    
     
     
     
