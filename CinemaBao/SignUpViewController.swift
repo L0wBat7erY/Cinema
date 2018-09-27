@@ -66,25 +66,34 @@ class SignUpViewController: UIViewController {
             return
         }
         
-//        var userInfoTemp = UserInfo()
+
         
         let url = URL(string: "https://cinema-hatin.herokuapp.com/api/auth/signup")
         let user: [String: String] = ["email" : txtEmailSignUp.text!, "name": txtUsernameSignUp.text!, "password": txtPasswordSignUP.text!]
         Alamofire.request(url!, method: .post, parameters: user, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: { (response) in
             switch response.result {
             case .success:
+                //self.present(signUpVC, animated: true, completion: nil)
+                
+                guard let info = try? JSONDecoder().decode(ListInfoSignUp.self, from: response.data!) else {
+                    print("Error")
+                    return
+                }
+                
+                
+//                usrList = info
+                if (info.status == 200) {
+                    self.present(signUpVC, animated: true, completion: nil)
+                    let toast = Toast(text: "Đăng ký thành công")
+                    toast.show()
+                }
                 self.present(signUpVC, animated: true, completion: nil)
-                let toast = Toast(text: "Đăng ký thành công")
-                toast.show()
             case .failure:
                 let toast = Toast(text: "Đăng ký thất bại")
                 toast.show()
                
             }
-            guard let dulieu = try? JSONDecoder().decode(UserInfo.self, from: response.data!) else {
-                
-                return
-            }
+            
         }
     )}
 

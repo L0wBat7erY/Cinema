@@ -9,6 +9,7 @@
 import UIKit
 import FontAwesome_swift
 import Toaster
+import Alamofire
 
 class SignInViewController: UIViewController {
 
@@ -38,10 +39,43 @@ class SignInViewController: UIViewController {
         }
         
         
+//        var usrSignIn = GetToken()
         
-        self.present(loginSuccessVC, animated: true, completion: nil)
+        let userDefault: UserDefaults = UserDefaults.init()
+        let tokenIsGetted: String = ""
+        
+        let url = URL(string: "https://cinema-hatin.herokuapp.com/api/auth/signin")
+        let user: [String: String] = ["email" : txtEmailSignIn.text!, "password": txtPasswordSignIN.text!]
+        Alamofire.request(url!, method: .post, parameters: user, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: {
+            (response) in
+            switch response.result {
+            case .success:
+                guard let infoSignIn = try? JSONDecoder().decode(GetToken.self, from: response.data!) else {
+                    print("Error")
+                    return
+                }
+                userDefault.set(infoSignIn.token, forKey: tokenIsGetted)
+                if (infoSignIn.status == 200) {
+                    self.present(loginSuccessVC, animated: true, completion: nil)
+//                    let toast = Toast(text: "Đăng nhập thành công")
+//                    toast.show()
+                }
+                if (infoSignIn.status == 404) {
+//                    self.present(loginSuccessVC, animated: true, completion: nil)
+                    let toast = Toast(text: "Sai tài khoản hoặc mật khẩu")
+                    toast.show()
+                }
+                
+            case .failure:
+                let toast = Toast(text: "Đăng nhập thất bại")
+                toast.show()
+            }
+        })
+        
+//        self.present(loginSuccessVC, animated: true, completion: nil)
         
     }
+    
     
     
     @IBAction func signupBtn(_ sender: Any) {

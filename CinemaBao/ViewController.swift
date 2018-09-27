@@ -17,6 +17,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var labelListMovie: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBAction func addNewMovieBtn(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let addNewMovieVC = storyboard.instantiateViewController(withIdentifier: "AddNewMovie")
+        self.present(addNewMovieVC, animated: true, completion: nil)
+    }
+    
+    
+    
     private let refreshControl = UIRefreshControl()
     private var number = 0
     
@@ -65,8 +73,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.dataSource = self
         tableView.delegate = self
         
-        
-        
+//        addNewMovieBtn.titleLabel?.font = UIFont.fontAwesome(ofSize: 30, style: .solid)
+//        addNewMovieBtn.setTitle(String.fontAwesomeIcon(name: .add), for: .plus)
         
         fetchData()
         

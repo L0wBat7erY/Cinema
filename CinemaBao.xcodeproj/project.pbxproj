@@ -14,6 +14,7 @@
 		9A0F2B862158CC76000529D5 /* FilmList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F2B852158CC76000529D5 /* FilmList.swift */; };
 		9A0F2B882158CC8E000529D5 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F2B872158CC8E000529D5 /* Movie.swift */; };
 		9A0F2B8A2158CCA2000529D5 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F2B892158CCA2000529D5 /* UserInfo.swift */; };
+		9A121A7A215BE36200F125EB /* GetToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A121A79215BE36200F125EB /* GetToken.swift */; };
 		9AA7AF44215881A200948384 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA7AF43215881A200948384 /* AppDelegate.swift */; };
 		9AA7AF46215881A200948384 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA7AF45215881A200948384 /* ViewController.swift */; };
 		9AA7AF49215881A200948384 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AA7AF47215881A200948384 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 		9AA86C2A215B27EB00524048 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA86C20215B27E800524048 /* OpenSans-SemiBold.ttf */; };
 		9AA86C2B215B27EB00524048 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA86C21215B27E900524048 /* OpenSans-Bold.ttf */; };
 		9AA86C2C215B27EB00524048 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA86C22215B27EA00524048 /* OpenSans-Italic.ttf */; };
+		9AA88A77215C66E8002CF999 /* ListInfoSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA88A76215C66E8002CF999 /* ListInfoSignUp.swift */; };
 		9ABB506A215A793B00A79740 /* AddNewMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABB5069215A793B00A79740 /* AddNewMovie.swift */; };
 		9ABB506C215A79E100A79740 /* FilmInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABB506B215A79E100A79740 /* FilmInfo.swift */; };
 		9ABB506E215A8B7E00A79740 /* ResetPassWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABB506D215A8B7E00A79740 /* ResetPassWord.swift */; };
@@ -43,6 +45,7 @@
 		9A0F2B852158CC76000529D5 /* FilmList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmList.swift; sourceTree = "<group>"; };
 		9A0F2B872158CC8E000529D5 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		9A0F2B892158CCA2000529D5 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		9A121A79215BE36200F125EB /* GetToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetToken.swift; sourceTree = "<group>"; };
 		9AA7AF40215881A200948384 /* CinemaBao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CinemaBao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AA7AF43215881A200948384 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9AA7AF45215881A200948384 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +63,7 @@
 		9AA86C20215B27E800524048 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		9AA86C21215B27E900524048 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		9AA86C22215B27EA00524048 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		9AA88A76215C66E8002CF999 /* ListInfoSignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInfoSignUp.swift; sourceTree = "<group>"; };
 		9ABB5069215A793B00A79740 /* AddNewMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewMovie.swift; sourceTree = "<group>"; };
 		9ABB506B215A79E100A79740 /* FilmInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInfo.swift; sourceTree = "<group>"; };
 		9ABB506D215A8B7E00A79740 /* ResetPassWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassWord.swift; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 				9ABB5069215A793B00A79740 /* AddNewMovie.swift */,
 				9ABB506B215A79E100A79740 /* FilmInfo.swift */,
 				9ABB506D215A8B7E00A79740 /* ResetPassWord.swift */,
+				9A121A79215BE36200F125EB /* GetToken.swift */,
+				9AA88A76215C66E8002CF999 /* ListInfoSignUp.swift */,
 			);
 			path = CinemaBao;
 			sourceTree = "<group>";
@@ -289,11 +295,13 @@
 			files = (
 				9A0F2B882158CC8E000529D5 /* Movie.swift in Sources */,
 				9A0F2B8021588C5C000529D5 /* SignInViewController.swift in Sources */,
+				9A121A7A215BE36200F125EB /* GetToken.swift in Sources */,
 				9ABB506E215A8B7E00A79740 /* ResetPassWord.swift in Sources */,
 				9AA7AF46215881A200948384 /* ViewController.swift in Sources */,
 				9A0F2B8221588CAD000529D5 /* SignUpViewController.swift in Sources */,
 				9A0F2B7E21588A0D000529D5 /* CustomViewCell.swift in Sources */,
 				9ABB506C215A79E100A79740 /* FilmInfo.swift in Sources */,
+				9AA88A77215C66E8002CF999 /* ListInfoSignUp.swift in Sources */,
 				9ABB506A215A793B00A79740 /* AddNewMovie.swift in Sources */,
 				9A0F2B862158CC76000529D5 /* FilmList.swift in Sources */,
 				9AA7AF44215881A200948384 /* AppDelegate.swift in Sources */,
