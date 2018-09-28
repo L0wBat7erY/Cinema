@@ -13,6 +13,6 @@ target 'CinemaBao' do
     pod 'BFPaperButton'
     pod 'FontAwesome.swift'
     pod 'AlamofireImage', '~> 3.4'
-    
+    pod 'Dropdowns'
 
 end

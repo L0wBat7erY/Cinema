@@ -21,7 +21,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let addNewMovieVC = storyboard.instantiateViewController(withIdentifier: "AddNewMovie")
         self.present(addNewMovieVC, animated: true, completion: nil)
+        
+        
+        
     }
+    
+    
+    @IBOutlet weak var addNewImg: UIButton!
+    
     
     
     
@@ -72,6 +79,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        addNewImg.layer.cornerRadius = 25
         
 //        addNewMovieBtn.titleLabel?.font = UIFont.fontAwesome(ofSize: 30, style: .solid)
 //        addNewMovieBtn.setTitle(String.fontAwesomeIcon(name: .add), for: .plus)

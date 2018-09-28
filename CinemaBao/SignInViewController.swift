@@ -11,6 +11,8 @@ import FontAwesome_swift
 import Toaster
 import Alamofire
 
+
+
 class SignInViewController: UIViewController {
 
     @IBOutlet weak var iconPassWord: UIImageView!
@@ -20,6 +22,7 @@ class SignInViewController: UIViewController {
     
 //    let token = UserDefaults.standard
     
+    static var userDefault: UserDefaults = UserDefaults.standard
     
     @IBAction func loginSuccessListMovie(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -41,8 +44,7 @@ class SignInViewController: UIViewController {
         
 //        var usrSignIn = GetToken()
         
-        let userDefault: UserDefaults = UserDefaults.init()
-        let tokenIsGetted: String = ""
+        
         
         let url = URL(string: "https://cinema-hatin.herokuapp.com/api/auth/signin")
         let user: [String: String] = ["email" : txtEmailSignIn.text!, "password": txtPasswordSignIN.text!]
@@ -54,7 +56,10 @@ class SignInViewController: UIViewController {
                     print("Error")
                     return
                 }
-                userDefault.set(infoSignIn.token, forKey: tokenIsGetted)
+                SignInViewController.userDefault.set(infoSignIn.token, forKey: "token")
+                SignInViewController.userDefault.set(infoSignIn.user._id, forKey: "userNameID")
+                SignInViewController.userDefault.set(infoSignIn.user.name, forKey: "userName")
+                SignInViewController.userDefault.set(infoSignIn.user.email, forKey: "email")
                 if (infoSignIn.status == 200) {
                     self.present(loginSuccessVC, animated: true, completion: nil)
 //                    let toast = Toast(text: "Đăng nhập thành công")

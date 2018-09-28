@@ -26,9 +26,9 @@ class CustomViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        iconTheLoai.image = UIImage.fontAwesomeIcon(name: .video, style: .solid, textColor: .green, size: CGSize(width: 30, height: 30))
-        iconIDMovie.image = UIImage.fontAwesomeIcon(name: .info, style: .solid, textColor: .green, size: CGSize(width: 30, height: 30))
-        iconReleaseDate.image = UIImage.fontAwesomeIcon(name: .calendar, style: .solid, textColor: .green, size: CGSize(width: 30, height: 30))
+        iconTheLoai.image = UIImage.fontAwesomeIcon(name: .video, style: .solid, textColor: .blue, size: CGSize(width: 30, height: 30))
+        iconIDMovie.image = UIImage.fontAwesomeIcon(name: .info, style: .solid, textColor: .blue, size: CGSize(width: 30, height: 30))
+        iconReleaseDate.image = UIImage.fontAwesomeIcon(name: .calendar, style: .solid, textColor: .blue, size: CGSize(width: 30, height: 30))
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
