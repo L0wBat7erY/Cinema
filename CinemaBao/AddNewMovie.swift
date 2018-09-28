@@ -12,41 +12,9 @@ import Alamofire
 import AlamofireImage
 import HSDatePickerViewController
 
-class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, HSDatePickerViewControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, HSDatePickerViewControllerDelegate, UITextFieldDelegate {
     
-    let manyGerne = ["Action", "Adventure", "Sci-fi", "Drama", "Cartoon"]
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return manyGerne.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return manyGerne[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        addGenreMovie.text = manyGerne[row]
-        addGenreMovie.isHidden = true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == self.addGenreMovie {
-            addGenreMovie.isHidden = false
-            
-        }
-    }
-    
-    
-    @IBOutlet weak var pickGerne: UIPickerView!
-    
-    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
-        pickGerne.dataSource = self
-        pickGerne.delegate = self
-    }
+
     
 
     @IBAction func turnBackListMovie(_ sender: Any) {
@@ -89,7 +57,22 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
         dismiss(animated: true, completion: nil)
     }
     
- 
+    var bienDate = Date()
+    
+    func hsDatePickerPickedDate(_ date: Date!) {
+        let formatterDay = DateFormatter()
+        formatterDay.dateFormat = "dd/MM/yyyy"
+        addReleaseDate.text = formatterDay.string(from: date)
+//        print(addReleaseDate.text)
+//        bienDate = date
+    }
+    
+    let dateRelease = HSDatePickerViewController()
+    
+    @IBAction func datePK(_ sender: UITextField) {
+        present(dateRelease, animated: true, completion: nil)
+    }
+    
     
     @IBAction func addMovieBtn(_ sender: Any) {
         if addNameMovie.text == "" {
@@ -97,14 +80,18 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
             toast.show()
             return
         }
+
+      
+        let dfmatter = DateFormatter()
+        dfmatter.dateFormat="dd/MM/yyyy"
+        let date = dfmatter.date(from: addReleaseDate.text!)
+        let dateStamp:TimeInterval = date!.timeIntervalSince1970
+        let dateSt:Int = Int(dateStamp)
         
-        let releaseDate = DateFormatter()
-        let dateFormInt = releaseDate.date(from: addReleaseDate.text!)
-        let timeInterval = dateFormInt?.timeIntervalSince1970
-        let timeFormInt = Int(timeInterval!)
+        
         
         let url = URL(string: "https://cinema-hatin.herokuapp.com/api/cinema")
-        let parameter: [String: Any] = ["name": addNameMovie.text!, "gerne": addGenreMovie.text!, "releaseDate": timeFormInt, "content": addContent.text! ]
+        let parameter: [String: Any] = ["name": addNameMovie.text!, "gerne": addGenreMovie.text!, "releaseDate": dateSt, "content": addContent.text! ]
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             for (key, value) in parameter {
                 multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
@@ -133,22 +120,13 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
     }
     
     
-    
-    
-    func hsDatePickerPickedDate(_ date: Date!) {
-        let formatterDay = DateFormatter()
-        formatterDay.dateFormat = "dd/MM/yyyy"
-        addReleaseDate.text = formatterDay.string(from: date)
-    }
-    
-    let dateRelease = HSDatePickerViewController()
 
-    @IBAction func datePK(_ sender: UITextField) {
-        present(dateRelease, animated: true, completion: nil)
-    }
     
     
     
+    
+    
+
     
     
     
@@ -167,7 +145,6 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
         addContent.layer.cornerRadius = 5.0;
         
         dateRelease.delegate = self
-        addGenreMovie.delegate = self
         
         
         addImgMovie.image = UIImage(named: "ProfileMovie.png")

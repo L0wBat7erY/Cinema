@@ -46,7 +46,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomViewCell
 //        cell.tenPhim.text = self.danhsachphim[indexPath.row].name
 //        cell.idPhim.text = self.danhsachphim[indexPath.row]._id
+        
         cell.setDatainCell(danhsachphim[indexPath.row])
+        
         if danhsachphim.count > 0 {
             let eachImage = danhsachphim[indexPath.row]
             if let imageURL = eachImage.posterURL as? String {
@@ -80,7 +82,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.dataSource = self
         tableView.delegate = self
         
-        addNewImg.layer.cornerRadius = 25
+        addNewImg.layer.cornerRadius = 30
         
 //        addNewMovieBtn.titleLabel?.font = UIFont.fontAwesome(ofSize: 30, style: .solid)
 //        addNewMovieBtn.setTitle(String.fontAwesomeIcon(name: .add), for: .plus)

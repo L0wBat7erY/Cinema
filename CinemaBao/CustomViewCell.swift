@@ -38,7 +38,7 @@ class CustomViewCell: UITableViewCell {
     }
 
     func setDatainCell(_ movie: Movie) {
-        idPhim.text = movie._id
+        idPhim.text = movie.content
         theLoai.text = movie.genre
         tenPhim.text = movie.name
         //profileMovie.image = movie.posterURL
