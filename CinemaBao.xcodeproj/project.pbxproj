@@ -15,6 +15,7 @@
 		9A0F2B882158CC8E000529D5 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F2B872158CC8E000529D5 /* Movie.swift */; };
 		9A0F2B8A2158CCA2000529D5 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F2B892158CCA2000529D5 /* UserInfo.swift */; };
 		9A121A7A215BE36200F125EB /* GetToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A121A79215BE36200F125EB /* GetToken.swift */; };
+		9A3CC3BA215E8811004B8DEF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3CC3B9215E8811004B8DEF /* ProfileViewController.swift */; };
 		9A6AFE1D215D2F92003D6C6D /* CreateCinema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AFE1C215D2F92003D6C6D /* CreateCinema.swift */; };
 		9A6AFE1F215D2FF1003D6C6D /* DataCinemaCreatedReturn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AFE1E215D2FF1003D6C6D /* DataCinemaCreatedReturn.swift */; };
 		9AA7AF44215881A200948384 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA7AF43215881A200948384 /* AppDelegate.swift */; };
@@ -48,6 +49,7 @@
 		9A0F2B872158CC8E000529D5 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		9A0F2B892158CCA2000529D5 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		9A121A79215BE36200F125EB /* GetToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetToken.swift; sourceTree = "<group>"; };
+		9A3CC3B9215E8811004B8DEF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		9A6AFE1C215D2F92003D6C6D /* CreateCinema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCinema.swift; sourceTree = "<group>"; };
 		9A6AFE1E215D2FF1003D6C6D /* DataCinemaCreatedReturn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCinemaCreatedReturn.swift; sourceTree = "<group>"; };
 		9AA7AF40215881A200948384 /* CinemaBao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CinemaBao.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +129,7 @@
 				9AA88A76215C66E8002CF999 /* ListInfoSignUp.swift */,
 				9A6AFE1C215D2F92003D6C6D /* CreateCinema.swift */,
 				9A6AFE1E215D2FF1003D6C6D /* DataCinemaCreatedReturn.swift */,
+				9A3CC3B9215E8811004B8DEF /* ProfileViewController.swift */,
 			);
 			path = CinemaBao;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				9A121A7A215BE36200F125EB /* GetToken.swift in Sources */,
 				9ABB506E215A8B7E00A79740 /* ResetPassWord.swift in Sources */,
 				9AA7AF46215881A200948384 /* ViewController.swift in Sources */,
+				9A3CC3BA215E8811004B8DEF /* ProfileViewController.swift in Sources */,
 				9A0F2B8221588CAD000529D5 /* SignUpViewController.swift in Sources */,
 				9A0F2B7E21588A0D000529D5 /* CustomViewCell.swift in Sources */,
 				9ABB506C215A79E100A79740 /* FilmInfo.swift in Sources */,

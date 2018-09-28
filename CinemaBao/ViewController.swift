@@ -26,8 +26,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    @IBAction func profileBtn(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let goToProfileVC = storyboard.instantiateViewController(withIdentifier: "ProfileViewController")
+        self.present(goToProfileVC, animated: true, completion: nil)
+    }
+    
     
     @IBOutlet weak var addNewImg: UIButton!
+    @IBOutlet weak var imgBtnProfile: UIButton!
     
     
     
@@ -83,6 +90,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.delegate = self
         
         addNewImg.layer.cornerRadius = 30
+        imgBtnProfile.layer.cornerRadius = 30
         
 //        addNewMovieBtn.titleLabel?.font = UIFont.fontAwesome(ofSize: 30, style: .solid)
 //        addNewMovieBtn.setTitle(String.fontAwesomeIcon(name: .add), for: .plus)
