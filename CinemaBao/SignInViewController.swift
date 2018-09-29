@@ -62,8 +62,9 @@ class SignInViewController: UIViewController {
                 SignInViewController.userDefault.set(infoSignIn.user.email, forKey: "email")
                 if (infoSignIn.status == 200) {
                     self.present(loginSuccessVC, animated: true, completion: nil)
-//                    let toast = Toast(text: "Đăng nhập thành công")
-//                    toast.show()
+                    let toast = Toast(text: "Đăng nhập thành công")
+                    toast.show()
+                    print(infoSignIn.token)
                 }
                 if (infoSignIn.status == 404) {
 //                    self.present(loginSuccessVC, animated: true, completion: nil)
@@ -90,9 +91,9 @@ class SignInViewController: UIViewController {
     }
 
     @IBAction func resetPasswordSignIn(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let resetPasswordVC = storyboard.instantiateViewController(withIdentifier: "ResetPassWord")
-        self.present(resetPasswordVC, animated: true, completion: nil)
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let resetPasswordVC = storyboard.instantiateViewController(withIdentifier: "ResetPassWord")
+//        self.present(resetPasswordVC, animated: true, completion: nil)
     }
     
     

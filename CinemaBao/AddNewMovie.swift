@@ -11,6 +11,7 @@ import Toaster
 import Alamofire
 import AlamofireImage
 import HSDatePickerViewController
+import Dropdowns
 
 class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, HSDatePickerViewControllerDelegate, UITextFieldDelegate {
     
@@ -57,7 +58,7 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
         dismiss(animated: true, completion: nil)
     }
     
-    var bienDate = Date()
+//    var bienDate = Date()
     
     func hsDatePickerPickedDate(_ date: Date!) {
         let formatterDay = DateFormatter()
@@ -91,7 +92,7 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
         
         
         let url = URL(string: "https://cinema-hatin.herokuapp.com/api/cinema")
-        let parameter: [String: Any] = ["name": addNameMovie.text!, "gerne": addGenreMovie.text!, "releaseDate": dateSt, "content": addContent.text! ]
+        let parameter: [String: Any] = ["name": addNameMovie.text!, "genre": addGenreMovie.text!, "releaseDate": dateSt, "content": addContent.text!, "creatorId": SignInViewController.userDefault.string(forKey: "userNameID")!]
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             for (key, value) in parameter {
                 multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
@@ -145,6 +146,14 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
         addContent.layer.cornerRadius = 5.0;
         
         dateRelease.delegate = self
+        
+        let formatterDay = DateFormatter()
+        let dateNow = Date()
+        formatterDay.dateFormat = "dd/MM/yyyy"
+        addReleaseDate.text = formatterDay.string(from: dateNow)
+        
+        addGenreMovie.text = "Action"
+        
         
         
         addImgMovie.image = UIImage(named: "ProfileMovie.png")

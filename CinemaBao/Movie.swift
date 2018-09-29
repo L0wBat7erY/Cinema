@@ -16,6 +16,7 @@ struct Movie: Codable {
     var content: String = ""
     var user: UserInfo = UserInfo()
     var posterURL: String = ""
+    var releaseDate: Double = 0
     
     enum CodingKeys: String, CodingKey {
         case _id
@@ -25,6 +26,7 @@ struct Movie: Codable {
         case content
         case user
         case posterURL
+        case releaseDate
     }
     
 }
@@ -41,6 +43,7 @@ extension Movie {
             content = (try values.decodeIfPresent(String.self, forKey: .content)) ?? ""
             user = (try values.decodeIfPresent(UserInfo.self, forKey: .user)) ?? UserInfo()
             posterURL = (try values.decodeIfPresent(String.self, forKey: .posterURL)) ?? ""
+            releaseDate = (try values.decodeIfPresent(Double.self, forKey: .releaseDate)) ?? 0
         } catch {
             
         }

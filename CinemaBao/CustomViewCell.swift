@@ -9,6 +9,8 @@
 import UIKit
 import FontAwesome_swift
 import PullToRefresh
+import Alamofire
+import AlamofireImage
 
 class CustomViewCell: UITableViewCell {
 
@@ -41,9 +43,30 @@ class CustomViewCell: UITableViewCell {
         idPhim.text = movie.content
         theLoai.text = movie.genre
         tenPhim.text = movie.name
-        //profileMovie.image = movie.posterURL
+        Alamofire.request("https://cinema-hatin.herokuapp.com" + movie.posterURL).responseImage(completionHandler: { (response) in
+            print(response)
+            switch response.result {
+            case .success:
+                if let image = response.result.value {
+                    DispatchQueue.main.async {
+                        self.profileMovie.image = image
+                    }
+                }
+            case .failure:
+                print("Error")
+                return
+            }
+        })
+        releaseMovie.text = convertTimestampToHumanDate(timestamp: movie.releaseDate)
     }
     
+    func convertTimestampToHumanDate(timestamp: Double) -> String {
+        let date = Date(timeIntervalSince1970: timestamp)
+        let formatterDate = DateFormatter()
+        formatterDate.dateFormat = "dd/MM/yyyy"
+        let strDate = formatterDate.string(from: date)
+        return strDate
+    }
     
     
 }
