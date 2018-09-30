@@ -20,13 +20,12 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var txtEmailSignIn: UITextField!
     @IBOutlet weak var txtPasswordSignIN: UITextField!
     
-//    let token = UserDefaults.standard
+
+    
     
     static var userDefault: UserDefaults = UserDefaults.standard
     
     @IBAction func loginSuccessListMovie(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let loginSuccessVC = storyboard.instantiateViewController(withIdentifier: "ViewController")
         
         if txtEmailSignIn.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
             let toast = Toast(text: "Vui lòng nhập Email")
@@ -40,10 +39,6 @@ class SignInViewController: UIViewController {
             
             return
         }
-        
-        
-//        var usrSignIn = GetToken()
-        
         
         
         let url = URL(string: "https://cinema-hatin.herokuapp.com/api/auth/signin")
@@ -60,14 +55,14 @@ class SignInViewController: UIViewController {
                 SignInViewController.userDefault.set(infoSignIn.user._id, forKey: "userNameID")
                 SignInViewController.userDefault.set(infoSignIn.user.name, forKey: "userName")
                 SignInViewController.userDefault.set(infoSignIn.user.email, forKey: "email")
+                SignInViewController.userDefault.set(self.txtPasswordSignIN.text, forKey: "password")
                 if (infoSignIn.status == 200) {
-                    self.present(loginSuccessVC, animated: true, completion: nil)
+                    self.performSegue(withIdentifier: "SignInSuccess", sender: self)
                     let toast = Toast(text: "Đăng nhập thành công")
                     toast.show()
                     print(infoSignIn.token)
                 }
-                if (infoSignIn.status == 404) {
-//                    self.present(loginSuccessVC, animated: true, completion: nil)
+                else {
                     let toast = Toast(text: infoSignIn.errorMessage)
                     toast.show()
                 }
@@ -78,24 +73,21 @@ class SignInViewController: UIViewController {
             }
         })
         
-//        self.present(loginSuccessVC, animated: true, completion: nil)
-        
     }
     
     
     
     @IBAction func signupBtn(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let signupVC = storyboard.instantiateViewController(withIdentifier: "SignUpViewController")
-        self.present(signupVC, animated: true, completion: nil)
+        self.performSegue(withIdentifier: "gotoSignUpVC", sender: self)
     }
 
     @IBAction func resetPasswordSignIn(_ sender: Any) {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let resetPasswordVC = storyboard.instantiateViewController(withIdentifier: "ResetPassWord")
-//        self.present(resetPasswordVC, animated: true, completion: nil)
+        self.performSegue(withIdentifier: "forgetPassword", sender: self)
     }
     
+    @IBAction func gobackListMovieNoSignIn(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     
     
@@ -114,15 +106,17 @@ class SignInViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        switch segue.identifier {
+        case "SignInSuccess":
+            print("SignInSuccess")
+        case "gotoSignUpVC":
+            print("gotoSignUpVC")
+        case "forgetPassword":
+            print("forgetPassword")
+        default:
+            break
+        }
     }
-    */
 
 }

@@ -26,16 +26,10 @@ class SignUpViewController: UIViewController {
     
     
     @IBAction func signInBtn(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let signinVC = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
-        
-       self.present(signinVC, animated: true, completion: nil)
+        self.performSegue(withIdentifier: "gotoSignInVC", sender: self)
     }
     
     @IBAction func signUpBtn(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let signUpVC = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
-//        txtEmailSignUp.text?.trimmingCharacters(in: .whitespacesAndNewlines).count
         
         if txtUsernameSignUp.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
             let toast = Toast(text: "Vui lòng nhập Username")
@@ -73,21 +67,16 @@ class SignUpViewController: UIViewController {
         Alamofire.request(url!, method: .post, parameters: user, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: { (response) in
             switch response.result {
             case .success:
-                //self.present(signUpVC, animated: true, completion: nil)
                 
                 guard let info = try? JSONDecoder().decode(ListInfoSignUp.self, from: response.data!) else {
                     print("Error")
                     return
                 }
-                
-                
-//                usrList = info
                 if (info.status == 200) {
-                    self.present(signUpVC, animated: true, completion: nil)
+                    self.performSegue(withIdentifier: "SignUpSuccessGotoSignIn", sender: self)
                     let toast = Toast(text: "Đăng ký thành công")
                     toast.show()
                 }
-                self.present(signUpVC, animated: true, completion: nil)
             case .failure:
                 let toast = Toast(text: "Đăng ký thất bại")
                 toast.show()
@@ -125,18 +114,16 @@ class SignUpViewController: UIViewController {
     }
     
     
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        switch segue.identifier {
+        case "gotoSignInVC":
+            print("gotoSignInVC")
+        case "SignUpSuccessGotoSignIn":
+            print("SignUpSuccessGotoSignIn")
+        default:
+            break
+        }
     }
-    */
-
 }
 
 extension UIView {

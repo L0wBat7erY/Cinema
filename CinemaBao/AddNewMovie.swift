@@ -11,11 +11,8 @@ import Toaster
 import Alamofire
 import AlamofireImage
 import HSDatePickerViewController
-import Dropdowns
 
 class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, HSDatePickerViewControllerDelegate, UITextFieldDelegate {
-    
-
     
 
     @IBAction func turnBackListMovie(_ sender: Any) {
@@ -30,10 +27,7 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
     @IBOutlet weak var addReleaseDate: UITextField!
     @IBOutlet weak var addContent: UITextView!
     
-    
-    
-    
-//    var imageMovie = "ProfileMovie.png"
+
     var imagePicker = UIImagePickerController()
     var poster = UIImage()
     @IBAction func chooseImgBtn(_ sender: Any) {
@@ -57,15 +51,11 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
         }
         dismiss(animated: true, completion: nil)
     }
-    
-//    var bienDate = Date()
-    
+
     func hsDatePickerPickedDate(_ date: Date!) {
         let formatterDay = DateFormatter()
         formatterDay.dateFormat = "dd/MM/yyyy"
         addReleaseDate.text = formatterDay.string(from: date)
-//        print(addReleaseDate.text)
-//        bienDate = date
     }
     
     let dateRelease = HSDatePickerViewController()
@@ -110,28 +100,13 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
                 print("Success")
                 let toast = Toast(text: "Đã tạo phim thành công")
                 toast.show()
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let turnBackListMovieVC = storyboard.instantiateViewController(withIdentifier: "ViewController")
-                self.present(turnBackListMovieVC, animated: true, completion: nil)
+                self.performSegue(withIdentifier: "createMovieSuccess", sender: self)
             case .failure(let encodingError):
                 print(encodingError)
                 print("Fail")
             }
         }
     }
-    
-    
-
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
     
     
     
@@ -154,12 +129,7 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
         
         addGenreMovie.text = "Action"
         
-        
-        
         addImgMovie.image = UIImage(named: "ProfileMovie.png")
-//        addImgMovie.image = image
-//        self.addImgMovie = UIImage(named: "ProfileMovie.png")
-//        addImgMovie.image = image
         
         // Do any additional setup after loading the view.
     }
@@ -169,15 +139,13 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        switch segue.identifier {
+        case "createMovieSuccess":
+            print("createMovieSuccess")
+        default:
+            break
+        }
     }
-    */
-
+    
 }

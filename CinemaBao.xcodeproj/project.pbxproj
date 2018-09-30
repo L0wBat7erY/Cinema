@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5BE8986E75F5CEB94609D0D8 /* Pods_CinemaBao.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66B7194360DB467C479B1DC4 /* Pods_CinemaBao.framework */; };
-		9A0F2B7E21588A0D000529D5 /* CustomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F2B7D21588A0D000529D5 /* CustomViewCell.swift */; };
+		9A0F2B7E21588A0D000529D5 /* ListMovieViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F2B7D21588A0D000529D5 /* ListMovieViewCell.swift */; };
 		9A0F2B8021588C5C000529D5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F2B7F21588C5C000529D5 /* SignInViewController.swift */; };
 		9A0F2B8221588CAD000529D5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F2B8121588CAD000529D5 /* SignUpViewController.swift */; };
 		9A0F2B862158CC76000529D5 /* FilmList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F2B852158CC76000529D5 /* FilmList.swift */; };
@@ -34,6 +34,8 @@
 		9AA86C2B215B27EB00524048 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA86C21215B27E900524048 /* OpenSans-Bold.ttf */; };
 		9AA86C2C215B27EB00524048 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA86C22215B27EA00524048 /* OpenSans-Italic.ttf */; };
 		9AA88A77215C66E8002CF999 /* ListInfoSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA88A76215C66E8002CF999 /* ListInfoSignUp.swift */; };
+		9AB6A797216080F700220C7C /* SendEmailResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB6A796216080F700220C7C /* SendEmailResetPasswordVC.swift */; };
+		9AB6A79921609B5E00220C7C /* EditMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB6A79821609B5E00220C7C /* EditMovieViewController.swift */; };
 		9ABB506A215A793B00A79740 /* AddNewMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABB5069215A793B00A79740 /* AddNewMovie.swift */; };
 		9ABB506C215A79E100A79740 /* FilmInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABB506B215A79E100A79740 /* FilmInfo.swift */; };
 		9ABB506E215A8B7E00A79740 /* ResetPassWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABB506D215A8B7E00A79740 /* ResetPassWord.swift */; };
@@ -42,7 +44,7 @@
 /* Begin PBXFileReference section */
 		3FAEA1A0F06699C4564B4C12 /* Pods-CinemaBao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CinemaBao.release.xcconfig"; path = "Target Support Files/Pods-CinemaBao/Pods-CinemaBao.release.xcconfig"; sourceTree = "<group>"; };
 		66B7194360DB467C479B1DC4 /* Pods_CinemaBao.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CinemaBao.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9A0F2B7D21588A0D000529D5 /* CustomViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewCell.swift; sourceTree = "<group>"; };
+		9A0F2B7D21588A0D000529D5 /* ListMovieViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMovieViewCell.swift; sourceTree = "<group>"; };
 		9A0F2B7F21588C5C000529D5 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		9A0F2B8121588CAD000529D5 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		9A0F2B852158CC76000529D5 /* FilmList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmList.swift; sourceTree = "<group>"; };
@@ -70,6 +72,8 @@
 		9AA86C21215B27E900524048 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		9AA86C22215B27EA00524048 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
 		9AA88A76215C66E8002CF999 /* ListInfoSignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInfoSignUp.swift; sourceTree = "<group>"; };
+		9AB6A796216080F700220C7C /* SendEmailResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendEmailResetPasswordVC.swift; sourceTree = "<group>"; };
+		9AB6A79821609B5E00220C7C /* EditMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMovieViewController.swift; sourceTree = "<group>"; };
 		9ABB5069215A793B00A79740 /* AddNewMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewMovie.swift; sourceTree = "<group>"; };
 		9ABB506B215A79E100A79740 /* FilmInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInfo.swift; sourceTree = "<group>"; };
 		9ABB506D215A8B7E00A79740 /* ResetPassWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassWord.swift; sourceTree = "<group>"; };
@@ -116,7 +120,7 @@
 				9AA7AF4A215881A300948384 /* Assets.xcassets */,
 				9AA7AF4C215881A300948384 /* LaunchScreen.storyboard */,
 				9AA7AF4F215881A300948384 /* Info.plist */,
-				9A0F2B7D21588A0D000529D5 /* CustomViewCell.swift */,
+				9A0F2B7D21588A0D000529D5 /* ListMovieViewCell.swift */,
 				9A0F2B7F21588C5C000529D5 /* SignInViewController.swift */,
 				9A0F2B8121588CAD000529D5 /* SignUpViewController.swift */,
 				9A0F2B852158CC76000529D5 /* FilmList.swift */,
@@ -130,6 +134,8 @@
 				9A6AFE1C215D2F92003D6C6D /* CreateCinema.swift */,
 				9A6AFE1E215D2FF1003D6C6D /* DataCinemaCreatedReturn.swift */,
 				9A3CC3B9215E8811004B8DEF /* ProfileViewController.swift */,
+				9AB6A796216080F700220C7C /* SendEmailResetPasswordVC.swift */,
+				9AB6A79821609B5E00220C7C /* EditMovieViewController.swift */,
 			);
 			path = CinemaBao;
 			sourceTree = "<group>";
@@ -257,7 +263,6 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/BFPaperButton/BFPaperButton.framework",
-				"${BUILT_PRODUCTS_DIR}/Dropdowns/Dropdowns.framework",
 				"${BUILT_PRODUCTS_DIR}/FontAwesome.swift/FontAwesome_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/HSDatePickerViewController/HSDatePickerViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/PullToRefresher/PullToRefresh.framework",
@@ -268,7 +273,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BFPaperButton.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Dropdowns.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontAwesome_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HSDatePickerViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PullToRefresh.framework",
@@ -308,16 +312,18 @@
 				9A0F2B882158CC8E000529D5 /* Movie.swift in Sources */,
 				9A0F2B8021588C5C000529D5 /* SignInViewController.swift in Sources */,
 				9A121A7A215BE36200F125EB /* GetToken.swift in Sources */,
+				9AB6A797216080F700220C7C /* SendEmailResetPasswordVC.swift in Sources */,
 				9ABB506E215A8B7E00A79740 /* ResetPassWord.swift in Sources */,
 				9AA7AF46215881A200948384 /* ViewController.swift in Sources */,
 				9A3CC3BA215E8811004B8DEF /* ProfileViewController.swift in Sources */,
 				9A0F2B8221588CAD000529D5 /* SignUpViewController.swift in Sources */,
-				9A0F2B7E21588A0D000529D5 /* CustomViewCell.swift in Sources */,
+				9A0F2B7E21588A0D000529D5 /* ListMovieViewCell.swift in Sources */,
 				9ABB506C215A79E100A79740 /* FilmInfo.swift in Sources */,
 				9AA88A77215C66E8002CF999 /* ListInfoSignUp.swift in Sources */,
 				9ABB506A215A793B00A79740 /* AddNewMovie.swift in Sources */,
 				9A0F2B862158CC76000529D5 /* FilmList.swift in Sources */,
 				9A6AFE1F215D2FF1003D6C6D /* DataCinemaCreatedReturn.swift in Sources */,
+				9AB6A79921609B5E00220C7C /* EditMovieViewController.swift in Sources */,
 				9AA7AF44215881A200948384 /* AppDelegate.swift in Sources */,
 				9A0F2B8A2158CCA2000529D5 /* UserInfo.swift in Sources */,
 			);

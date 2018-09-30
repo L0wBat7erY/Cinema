@@ -21,7 +21,9 @@ class FilmInfo: UIViewController {
     
     var dataFromHere = Movie()
 
-    
+    @IBAction func editMovieBtn(_ sender: Any) {
+        self.performSegue(withIdentifier: "editMovie", sender: self)
+    }
     
     
     @IBAction func backList(_ sender: Any) {
@@ -43,10 +45,8 @@ class FilmInfo: UIViewController {
         
         lblNameMovie.text = dataFromHere.name
         lblGenre.text = dataFromHere.genre
-        lblReleaseDate.text = convertTimestampToHumanDate(timestamp: dataFromHere.releaseDate)
+        lblReleaseDate.text = ViewController().convertTimestampToHumanDate(timestamp: dataFromHere.releaseDate)
         lblContent.text = dataFromHere.content
-        
-        print(dataFromHere.posterURL)
         
         Alamofire.request("https://cinema-hatin.herokuapp.com" + dataFromHere.posterURL).responseImage { response in
             switch response.result {
@@ -69,15 +69,15 @@ class FilmInfo: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "editMovie":
+            print("editMovie")
+            let destVC: EditMovieViewController = segue.destination as! EditMovieViewController
+            destVC.dataInEditVC = dataFromHere
+        default:
+            break
+        }
+    }
     
 }
