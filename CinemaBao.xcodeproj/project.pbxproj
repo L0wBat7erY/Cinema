@@ -39,6 +39,8 @@
 		9ABB506A215A793B00A79740 /* AddNewMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABB5069215A793B00A79740 /* AddNewMovie.swift */; };
 		9ABB506C215A79E100A79740 /* FilmInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABB506B215A79E100A79740 /* FilmInfo.swift */; };
 		9ABB506E215A8B7E00A79740 /* ResetPassWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABB506D215A8B7E00A79740 /* ResetPassWord.swift */; };
+		9AE104072161AEC70073EFB4 /* MovieInUserDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE104062161AEC70073EFB4 /* MovieInUserDetailCell.swift */; };
+		9AE1040B2161C9500073EFB4 /* ApiCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE1040A2161C9500073EFB4 /* ApiCall.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +79,8 @@
 		9ABB5069215A793B00A79740 /* AddNewMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewMovie.swift; sourceTree = "<group>"; };
 		9ABB506B215A79E100A79740 /* FilmInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInfo.swift; sourceTree = "<group>"; };
 		9ABB506D215A8B7E00A79740 /* ResetPassWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassWord.swift; sourceTree = "<group>"; };
+		9AE104062161AEC70073EFB4 /* MovieInUserDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInUserDetailCell.swift; sourceTree = "<group>"; };
+		9AE1040A2161C9500073EFB4 /* ApiCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCall.swift; sourceTree = "<group>"; };
 		EE450BE594A0076158E13935 /* Pods-CinemaBao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CinemaBao.debug.xcconfig"; path = "Target Support Files/Pods-CinemaBao/Pods-CinemaBao.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,6 +117,8 @@
 		9AA7AF42215881A200948384 /* CinemaBao */ = {
 			isa = PBXGroup;
 			children = (
+				9AE104092161C93D0073EFB4 /* Netword */,
+				9AE104082161C81F0073EFB4 /* Model */,
 				9AA86C18215B27C300524048 /* FontGoogle */,
 				9AA7AF43215881A200948384 /* AppDelegate.swift */,
 				9AA7AF45215881A200948384 /* ViewController.swift */,
@@ -136,6 +142,7 @@
 				9A3CC3B9215E8811004B8DEF /* ProfileViewController.swift */,
 				9AB6A796216080F700220C7C /* SendEmailResetPasswordVC.swift */,
 				9AB6A79821609B5E00220C7C /* EditMovieViewController.swift */,
+				9AE104062161AEC70073EFB4 /* MovieInUserDetailCell.swift */,
 			);
 			path = CinemaBao;
 			sourceTree = "<group>";
@@ -155,6 +162,21 @@
 				9AA86C1E215B27E600524048 /* OpenSans-SemiBoldItalic.ttf */,
 			);
 			path = FontGoogle;
+			sourceTree = "<group>";
+		};
+		9AE104082161C81F0073EFB4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9AE104092161C93D0073EFB4 /* Netword */ = {
+			isa = PBXGroup;
+			children = (
+				9AE1040A2161C9500073EFB4 /* ApiCall.swift */,
+			);
+			path = Netword;
 			sourceTree = "<group>";
 		};
 		CB4E569BF693490C09FA53A9 /* Pods */ = {
@@ -316,7 +338,9 @@
 				9ABB506E215A8B7E00A79740 /* ResetPassWord.swift in Sources */,
 				9AA7AF46215881A200948384 /* ViewController.swift in Sources */,
 				9A3CC3BA215E8811004B8DEF /* ProfileViewController.swift in Sources */,
+				9AE104072161AEC70073EFB4 /* MovieInUserDetailCell.swift in Sources */,
 				9A0F2B8221588CAD000529D5 /* SignUpViewController.swift in Sources */,
+				9AE1040B2161C9500073EFB4 /* ApiCall.swift in Sources */,
 				9A0F2B7E21588A0D000529D5 /* ListMovieViewCell.swift in Sources */,
 				9ABB506C215A79E100A79740 /* FilmInfo.swift in Sources */,
 				9AA88A77215C66E8002CF999 /* ListInfoSignUp.swift in Sources */,

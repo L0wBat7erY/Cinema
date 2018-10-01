@@ -12,8 +12,13 @@ import AlamofireImage
 import PullToRefresh
 import MobileCoreServices
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class ViewController: UIViewController {
     
+    let refreshControl = PullToRefresh()
+    var danhsachphim =  [Movie]()
+    var listMovietoSearch = [Movie]()
+    var searchIsTrue = false
+    var selectedPhim = Movie()
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var addNewImg: UIButton!
@@ -24,7 +29,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func addNewMovieBtn(_ sender: Any) {
         
         if SignInViewController.userDefault.string(forKey: "token") == nil {
-            
             
             let alert = UIAlertController(title: "Đăng nhập", message: "Bạn có muốn đăng nhập để tạo phim?", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "Không", style: .default, handler: nil)
@@ -46,15 +50,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func gotoProfile(_ sender: Any) {
         self.performSegue(withIdentifier: "gotoDetailUser", sender: self)
     }
-
-    
-    private let refreshControl = UIRefreshControl()
-    private var number = 0
-    
-    var danhsachphim =  [Movie]()
-    var listMovietoSearch = [Movie]()
-    var searchIsTrue = false
-    var selectedPhim = Movie()
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == "" || searchBar.text == nil {
@@ -71,38 +66,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             tableView.reloadData()
         }
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchIsTrue {
-            return listMovietoSearch.count
-        }
-        else {
-            return danhsachphim.count
-        }
-        
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListMovieViewCell
-        if searchIsTrue {
-            cell.setDatainCell(listMovietoSearch[indexPath.row])
-        }
-        else {
-            cell.setDatainCell(danhsachphim[indexPath.row])
-            
-        }
-        
-        return cell
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedPhim = danhsachphim[indexPath.row]
-        self.performSegue(withIdentifier: "gotoDetailMovie", sender: self)
-    }
-    
     
     func convertTimestampToHumanDate(timestamp: Double) -> String {
         let date = Date(timeIntervalSince1970: timestamp)
@@ -132,27 +95,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         fetchData()
+        
+//        tableView.addPullToRefresh(refreshControl) {
+//            self.fetchData()
+//        }
+//        tableView.endRefreshing()
+        
     }
     
     
     func fetchData() {
         //refreah
         
+        
         if let url = URL(string: "https://cinema-hatin.herokuapp.com/api/cinema") {
-            Alamofire.request(url)
-                .responseJSON { (reponse) in
-                    guard let listFilm = try? JSONDecoder().decode(FilmList.self, from: reponse.data!) else {
-                        //lay du lieu khong thanh cong
-                        print("Error")
-                        return
-                    }
-                    
-                    
-                    self.danhsachphim = listFilm.films
-                    
-                    self.tableView.refreshControl = self.refreshControl
-                    self.tableView.reloadData()
-                    self.refreshControl.endRefreshing()
+            ApiCall.getListMovies(url: url) { (movies) in
+                self.danhsachphim = movies
+                
+                self.tableView.reloadData()
+                //                    self.activityIndicatorView.
+                //                    self.refreshControl.stopAnimation()
             }
         }
     }
@@ -170,6 +132,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             destVC.dataFromHere = selectedPhim
         case "gotoDetailUser":
             print("gotoDetailUser")
+            let destVC: ProfileViewController = segue.destination as! ProfileViewController
+            destVC.listFavoriteMovie = danhsachphim
         default:
             break
         }
@@ -184,4 +148,41 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
 }
 
+extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchIsTrue {
+            return listMovietoSearch.count
+        }
+        else {
+            return danhsachphim.count
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListMovieViewCell
+        if searchIsTrue {
+            cell.setDatainCell(listMovietoSearch[indexPath.row])
+        }
+        else {
+            cell.setDatainCell(danhsachphim[indexPath.row])
+            
+        }
+        return cell
+    }
+}
 
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedPhim = danhsachphim[indexPath.row]
+        self.performSegue(withIdentifier: "gotoDetailMovie", sender: self)
+    }
+}
+
+extension ViewController: UISearchBarDelegate {
+    
+}

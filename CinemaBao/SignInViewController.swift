@@ -20,9 +20,6 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var txtEmailSignIn: UITextField!
     @IBOutlet weak var txtPasswordSignIN: UITextField!
     
-
-    
-    
     static var userDefault: UserDefaults = UserDefaults.standard
     
     @IBAction func loginSuccessListMovie(_ sender: Any) {

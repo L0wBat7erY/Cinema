@@ -348,6 +348,7 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                         <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="createMovieBtn"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="addNewMovieBtn:" destination="GIQ-tf-H9N" eventType="touchUpInside" id="nSc-6V-EKP"/>
@@ -685,6 +686,7 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                                         <color key="value" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="signInBtn"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="loginSuccessListMovie:" destination="kAO-y6-kbl" eventType="touchUpInside" id="cK1-Yq-aI7"/>
@@ -719,6 +721,7 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                         <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="signUpinSignInVCbtn"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="signupBtn:" destination="kAO-y6-kbl" eventType="touchUpInside" id="Nlp-8L-1Y0"/>
@@ -1051,22 +1054,47 @@
                                 </constraints>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bUT-QR-Ivj">
-                                <rect key="frame" x="25" y="233" width="325" height="168"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iqA-Ix-Erd">
+                                <rect key="frame" x="25" y="233" width="325" height="178"/>
+                                <color key="backgroundColor" red="0.1215686275" green="0.32156862749999998" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iqA-Ix-Erd">
                                     <size key="itemSize" width="166" height="168"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="2Rk-0b-g5b">
-                                        <rect key="frame" x="79.5" y="0.0" width="166" height="168"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="2Rk-0b-g5b" customClass="MovieInUserDetailCell" customModule="CinemaBao" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="5" width="166" height="168"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="166" height="168"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8JZ-Oz-VO6">
+                                                    <rect key="frame" x="23" y="0.0" width="120" height="120"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="8JZ-Oz-VO6" secondAttribute="height" multiplier="1:1" id="Jce-hz-25U"/>
+                                                        <constraint firstAttribute="height" constant="120" id="a4g-bO-lN6"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tên Phim" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXA-lh-FZ4">
+                                                    <rect key="frame" x="47" y="140" width="71" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="XXA-lh-FZ4" firstAttribute="top" secondItem="8JZ-Oz-VO6" secondAttribute="bottom" constant="20" id="XCa-I5-fAU"/>
+                                            <constraint firstItem="8JZ-Oz-VO6" firstAttribute="top" secondItem="2Rk-0b-g5b" secondAttribute="top" id="eBb-aW-hcj"/>
+                                            <constraint firstItem="8JZ-Oz-VO6" firstAttribute="centerX" secondItem="2Rk-0b-g5b" secondAttribute="centerX" id="gXD-Qo-coW"/>
+                                            <constraint firstItem="XXA-lh-FZ4" firstAttribute="centerX" secondItem="8JZ-Oz-VO6" secondAttribute="centerX" id="qZa-ae-cM3"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageMovie" destination="8JZ-Oz-VO6" id="KCP-Dp-TPc"/>
+                                            <outlet property="lblMovieName" destination="XXA-lh-FZ4" id="GC4-hN-Uon"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -1077,7 +1105,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="0.87403681509999998" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.14117647058823529" green="0.3411764705882353" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="q21-3c-UVD" firstAttribute="trailing" secondItem="FT2-3h-Pwu" secondAttribute="trailing" id="0kz-Pq-se1"/>
                             <constraint firstItem="feq-WB-yaS" firstAttribute="centerY" secondItem="FT2-3h-Pwu" secondAttribute="centerY" id="2nA-eh-QKI"/>
@@ -1099,7 +1127,7 @@
                             <constraint firstItem="MpC-r3-xTL" firstAttribute="trailing" secondItem="bUT-QR-Ivj" secondAttribute="trailing" constant="25" id="lhM-AG-3z6"/>
                             <constraint firstItem="Rra-cL-iIa" firstAttribute="leading" secondItem="MpC-r3-xTL" secondAttribute="leading" constant="106" id="pg3-Z3-qhA"/>
                             <constraint firstItem="MpC-r3-xTL" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FT2-3h-Pwu" secondAttribute="trailing" constant="25" id="qdA-SJ-DvQ"/>
-                            <constraint firstItem="Rra-cL-iIa" firstAttribute="top" secondItem="bUT-QR-Ivj" secondAttribute="bottom" constant="30" id="tSc-e0-Kje"/>
+                            <constraint firstItem="Rra-cL-iIa" firstAttribute="top" secondItem="bUT-QR-Ivj" secondAttribute="bottom" constant="20" id="tSc-e0-Kje"/>
                             <constraint firstItem="65C-bS-QMw" firstAttribute="centerY" secondItem="8VJ-lC-4ww" secondAttribute="centerY" id="u3b-eL-MOz"/>
                             <constraint firstItem="MpC-r3-xTL" firstAttribute="trailing" secondItem="WhL-HK-rNi" secondAttribute="trailing" constant="25" id="uVd-Y8-9lW"/>
                             <constraint firstItem="MpC-r3-xTL" firstAttribute="bottom" secondItem="FT2-3h-Pwu" secondAttribute="bottom" constant="150" id="uYA-JF-li5"/>
@@ -1112,6 +1140,7 @@
                         <viewLayoutGuide key="safeArea" id="MpC-r3-xTL"/>
                     </view>
                     <connections>
+                        <outlet property="collectionViewMovie" destination="bUT-QR-Ivj" id="leG-s7-lXx"/>
                         <outlet property="iconEmail" destination="zAr-ed-7Ny" id="m3Y-Nc-0Vu"/>
                         <outlet property="iconUserName" destination="feq-WB-yaS" id="fvZ-HF-PKk"/>
                         <outlet property="lblEmail" destination="Rra-cL-iIa" id="0if-wd-FMN"/>
@@ -1708,7 +1737,7 @@
         <image name="ProfileMovie" width="320" height="320"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UmY-Mo-ge8"/>
-        <segue reference="Pr6-qL-Zmh"/>
+        <segue reference="OHW-6f-wYO"/>
+        <segue reference="wZz-q9-9oC"/>
     </inferredMetricsTieBreakers>
 </document>
