@@ -30,6 +30,10 @@ class SignInViewController: UIViewController {
             
             return
         }
+      if isValidEmail(testStr: txtEmailSignIn.text!) == false {
+        let toast = Toast(text: "Email không hợp lệ")
+        toast.show()
+      }
         if txtPasswordSignIN.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
             let toast = Toast(text: "Vui lòng nhập Password")
             toast.show()
@@ -72,7 +76,10 @@ class SignInViewController: UIViewController {
         
     }
     
-    
+  @IBAction func turnOffBoard(_ sender: Any) {
+    self.view.endEditing(true)
+  }
+  
     
     @IBAction func signupBtn(_ sender: Any) {
         self.performSegue(withIdentifier: "gotoSignUpVC", sender: self)
@@ -83,7 +90,8 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func gobackListMovieNoSignIn(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+//        self.dismiss(animated: true, completion: nil)
+      self.performSegue(withIdentifier: "gobackListMovienoSignIn", sender: nil)
     }
     
     
@@ -111,9 +119,17 @@ class SignInViewController: UIViewController {
             print("gotoSignUpVC")
         case "forgetPassword":
             print("forgetPassword")
+        case "gobackListMovienoSignIn":
+          print("gobackListMovienoSignIn")
         default:
             break
         }
     }
-
+  func isValidEmail(testStr:String) -> Bool {
+    // print("validate calendar: \(testStr)")
+    let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+    
+    let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+    return emailTest.evaluate(with: testStr)
+  }
 }

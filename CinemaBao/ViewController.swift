@@ -9,31 +9,48 @@
 import UIKit
 import Alamofire
 import AlamofireImage
-import PullToRefresh
 import MobileCoreServices
 
 class ViewController: UIViewController {
     
-    let refreshControl = PullToRefresh()
+  
     var danhsachphim =  [Movie]()
     var listMovietoSearch = [Movie]()
     var searchIsTrue = false
     var selectedPhim = Movie()
+  var idUserDefault = SignInViewController.userDefault.string(forKey: "userNameID")
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var addNewImg: UIButton!
     @IBOutlet weak var imgBtnProfile: UIButton!
     @IBOutlet weak var labelListMovie: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    
+  @IBAction func turnOffKeyboard(_ sender: Any) {
+    self.view.endEditing(true)
+  }
+  
+  lazy var refreshControl: UIRefreshControl = {
+    let refreshControl = UIRefreshControl()
+    refreshControl.addTarget(self, action: #selector(updateListMovie(_:)), for: UIControlEvents.valueChanged)
+//    self.tableView.addSubview(self.refreshControl)
+    refreshControl.tintColor = UIColor.blue
+    return refreshControl
+  }()
+  
+  @objc func updateListMovie (_ refreshControl: UIRefreshControl) {
+    fetchData()
+    self.tableView.reloadData()
+    refreshControl.endRefreshing()
+  }
+  
     @IBAction func addNewMovieBtn(_ sender: Any) {
         
         if SignInViewController.userDefault.string(forKey: "token") == nil {
             
             let alert = UIAlertController(title: "Đăng nhập", message: "Bạn có muốn đăng nhập để tạo phim?", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "Không", style: .default, handler: nil)
+            let cancelAction = UIAlertAction(title: "Hủy", style: .destructive, handler: nil)
             alert.addAction(cancelAction)
-            let destroy = UIAlertAction(title: "Có", style: .default, handler: {
+            let destroy = UIAlertAction(title: "Đăng nhập", style: .default, handler: {
                 action in
                 self.performSegue(withIdentifier: "gotoAddMovieVCnoSignIn", sender: self)
             })
@@ -86,7 +103,11 @@ class ViewController: UIViewController {
         
         addNewImg.layer.cornerRadius = 30
         imgBtnProfile.layer.cornerRadius = 30
-        
+      
+      tableView.refreshControl = refreshControl
+      
+      
+//      print("\(SignInViewController.userDefault.string(forKey: "token"))")
         if SignInViewController.userDefault.string(forKey: "token") == nil {
             imgBtnProfile.isHidden = true
         }
@@ -133,12 +154,22 @@ class ViewController: UIViewController {
         case "gotoDetailUser":
             print("gotoDetailUser")
             let destVC: ProfileViewController = segue.destination as! ProfileViewController
-            destVC.listFavoriteMovie = danhsachphim
+//            destVC.listFavoriteMovie = danhsachphim
+            for phim in danhsachphim {
+              if phim.user._id == idUserDefault {
+                destVC.listFavoriteMovie.append(phim)
+              }
+          }
         default:
             break
         }
         
     }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    fetchData()
+    tableView.reloadData()
+  }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

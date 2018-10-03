@@ -12,201 +12,221 @@ import FontAwesome_swift
 import Alamofire
 
 class SignUpViewController: UIViewController {
-
-    @IBOutlet weak var txtUsernameSignUp: UITextField!
-    @IBOutlet weak var txtEmailSignUp: UITextField!
-    @IBOutlet weak var txtPasswordSignUP: UITextField!
-    @IBOutlet weak var txtConfirmSignUp: UITextField!
-    @IBOutlet weak var lblSignUp: UILabel!
-    @IBOutlet weak var iconUserSignUp: UIImageView!
-    @IBOutlet weak var iconEmailSignUp: UIImageView!
-    @IBOutlet weak var iconPasswordSignUp: UIImageView!
-    @IBOutlet weak var iconConfirmSignUp: UIImageView!
+  
+  @IBOutlet weak var txtUsernameSignUp: UITextField!
+  @IBOutlet weak var txtEmailSignUp: UITextField!
+  @IBOutlet weak var txtPasswordSignUP: UITextField!
+  @IBOutlet weak var txtConfirmSignUp: UITextField!
+  @IBOutlet weak var lblSignUp: UILabel!
+  @IBOutlet weak var iconUserSignUp: UIImageView!
+  @IBOutlet weak var iconEmailSignUp: UIImageView!
+  @IBOutlet weak var iconPasswordSignUp: UIImageView!
+  @IBOutlet weak var iconConfirmSignUp: UIImageView!
+  @IBAction func turnoffKeyboardBtn(_ sender: Any) {
+    self.view.endEditing(true)
+  }
+  
+  
+  
+  @IBAction func signInBtn(_ sender: Any) {
+    self.performSegue(withIdentifier: "gotoSignInVC", sender: self)
+  }
+  
+  @IBAction func signUpBtn(_ sender: Any) {
     
-    
-    
-    @IBAction func signInBtn(_ sender: Any) {
-        self.performSegue(withIdentifier: "gotoSignInVC", sender: self)
+    if txtUsernameSignUp.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
+      let toast = Toast(text: "Vui lòng nhập Username")
+      toast.show()
+      
+      return
+    }
+    if isValidEmail(testStr: txtEmailSignUp.text!) == false {
+      let toast = Toast(text: "Email không hợp lệ")
+      toast.show()
+    }
+    if txtEmailSignUp.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
+      let toast = Toast(text: "Vui lòng nhập email")
+      toast.show()
+      
+      return
+    }
+    if txtPasswordSignUP.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
+      let toast = Toast(text: "Vui lòng nhập password")
+      toast.show()
+      
+      return
+    }
+    if txtConfirmSignUp.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
+      let toast = Toast(text: "Vui lòng nhập lại password")
+      toast.show()
+      return
+    }
+    if txtConfirmSignUp.text != txtPasswordSignUP.text {
+      let toast = Toast(text: "Password không khớp")
+      toast.show()
+      return
     }
     
-    @IBAction func signUpBtn(_ sender: Any) {
+    let url = URL(string: "https://cinema-hatin.herokuapp.com/api/auth/signup")
+    let user: [String: String] = ["email" : txtEmailSignUp.text!, "name": txtUsernameSignUp.text!, "password": txtPasswordSignUP.text!]
+    Alamofire.request(url!, method: .post, parameters: user, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: { (response) in
+      switch response.result {
+      case .success:
         
-        if txtUsernameSignUp.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
-            let toast = Toast(text: "Vui lòng nhập Username")
-            toast.show()
-            
-            return
+        guard let info = try? JSONDecoder().decode(ListInfoSignUp.self, from: response.data!) else {
+          print("Error")
+          return
         }
-        if txtEmailSignUp.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
-            let toast = Toast(text: "Vui lòng nhập email")
-            toast.show()
-            
-            return
+        if (info.status == 200) {
+          let toast = Toast(text: "Đăng ký thành công")
+          toast.show()
+          SignInViewController.userDefault.set(info.token, forKey: "token")
+          SignInViewController.userDefault.set(info.user._id, forKey: "userNameID")
+          SignInViewController.userDefault.set(info.user.name, forKey: "userName")
+          SignInViewController.userDefault.set(info.user.email, forKey: "email")
+          SignInViewController.userDefault.set(self.txtPasswordSignUP.text, forKey: "password")
+          self.performSegue(withIdentifier: "SignUpSuccessgGotoListFilmVC", sender: self)
+        } else {
+          let toast = Toast(text: info.message)
+          toast.show()
         }
-        if txtPasswordSignUP.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
-            let toast = Toast(text: "Vui lòng nhập password")
-            toast.show()
-            
-            return
-        }
-        if txtConfirmSignUp.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
-            let toast = Toast(text: "Vui lòng nhập lại password")
-            toast.show()
-            return
-        }
-        if txtConfirmSignUp.text != txtPasswordSignUP.text {
-            let toast = Toast(text: "Password không khớp")
-            toast.show()
-            return
-        }
+      case .failure:
+        let toast = Toast(text: "Đăng ký thất bại")
+        toast.show()
         
-
-        
-        let url = URL(string: "https://cinema-hatin.herokuapp.com/api/auth/signup")
-        let user: [String: String] = ["email" : txtEmailSignUp.text!, "name": txtUsernameSignUp.text!, "password": txtPasswordSignUP.text!]
-        Alamofire.request(url!, method: .post, parameters: user, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: { (response) in
-            switch response.result {
-            case .success:
-                
-                guard let info = try? JSONDecoder().decode(ListInfoSignUp.self, from: response.data!) else {
-                    print("Error")
-                    return
-                }
-                if (info.status == 200) {
-                    self.performSegue(withIdentifier: "SignUpSuccessGotoSignIn", sender: self)
-                    let toast = Toast(text: "Đăng ký thành công")
-                    toast.show()
-                }
-            case .failure:
-                let toast = Toast(text: "Đăng ký thất bại")
-                toast.show()
-               
-            }
-            
-        }
+      }
+      
+    }
     )}
-
+  
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-        iconUserSignUp.image = UIImage.fontAwesomeIcon(name: .users, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
-        
-        iconEmailSignUp.image = UIImage.fontAwesomeIcon(name: .envelope, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
-        
-        iconPasswordSignUp.image = UIImage.fontAwesomeIcon(name: .lock, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
-        
-        iconConfirmSignUp.image = UIImage.fontAwesomeIcon(name: .key, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
-
-//        self.lblCinemaSignUp.layer.borderColor = UIColor.white.cgColor
-        lblSignUp.layer.borderColor = UIColor.green.cgColor
-        
-        
-        
-        // Do any additional setup after loading the view.
+    
+    iconUserSignUp.image = UIImage.fontAwesomeIcon(name: .users, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
+    
+    iconEmailSignUp.image = UIImage.fontAwesomeIcon(name: .envelope, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
+    
+    iconPasswordSignUp.image = UIImage.fontAwesomeIcon(name: .lock, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
+    
+    iconConfirmSignUp.image = UIImage.fontAwesomeIcon(name: .key, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
+    
+    //        self.lblCinemaSignUp.layer.borderColor = UIColor.white.cgColor
+    lblSignUp.layer.borderColor = UIColor.green.cgColor
+    
+    
+    
+    // Do any additional setup after loading the view.
+  }
+  
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    switch segue.identifier {
+    case "gotoSignInVC":
+      print("gotoSignInVC")
+    case "SignUpSuccessgGotoListFilmVC":
+      print("SignUpSuccessgGotoListFilmVC")
+    default:
+      break
     }
+  }
+  func isValidEmail(testStr:String) -> Bool {
+    // print("validate calendar: \(testStr)")
+    let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
     
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "gotoSignInVC":
-            print("gotoSignInVC")
-        case "SignUpSuccessGotoSignIn":
-            print("SignUpSuccessGotoSignIn")
-        default:
-            break
-        }
-    }
+    let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+    return emailTest.evaluate(with: testStr)
+  }
 }
 
 extension UIView {
-    @IBInspectable
-    var cornerRadius: CGFloat {
-        get {
-            return layer.cornerRadius
-        }
-        set {
-            layer.cornerRadius = newValue
-        }
+  @IBInspectable
+  var cornerRadius: CGFloat {
+    get {
+      return layer.cornerRadius
     }
-    @IBInspectable
-    var borderWidth: CGFloat {
-        get {
-            return layer.borderWidth
-        }
-        set {
-            layer.borderWidth = newValue
-        }
+    set {
+      layer.cornerRadius = newValue
     }
-    @IBInspectable
-    var borderColor: UIColor? {
-        get {
-            if let color = layer.borderColor {
-                return UIColor(cgColor: color)
-            }
-            return nil
-        }
-        set {
-            if let color = newValue {
-                layer.borderColor = color.cgColor
-            } else {
-                layer.borderColor = nil
-            }
-        }
+  }
+  @IBInspectable
+  var borderWidth: CGFloat {
+    get {
+      return layer.borderWidth
     }
-    @IBInspectable
-    var shadowRadius: CGFloat {
-        get {
-            return layer.shadowRadius
-        }
-        set {
-            layer.shadowRadius = newValue
-        }
+    set {
+      layer.borderWidth = newValue
     }
-    
-    @IBInspectable
-    var shadowOpacity: Float {
-        get {
-            return layer.shadowOpacity
-        }
-        set {
-            layer.shadowOpacity = newValue
-        }
+  }
+  @IBInspectable
+  var borderColor: UIColor? {
+    get {
+      if let color = layer.borderColor {
+        return UIColor(cgColor: color)
+      }
+      return nil
     }
-    
-    @IBInspectable
-    var shadowOffset: CGSize {
-        get {
-            return layer.shadowOffset
-        }
-        set {
-            layer.shadowOffset = newValue
-        }
+    set {
+      if let color = newValue {
+        layer.borderColor = color.cgColor
+      } else {
+        layer.borderColor = nil
+      }
     }
-    
-    @IBInspectable
-    var shadowColor: UIColor? {
-        get {
-            if let color = layer.shadowColor {
-                return UIColor(cgColor: color)
-            }
-            return nil
-        }
-        set {
-            if let color = newValue {
-                layer.shadowColor = color.cgColor
-            } else {
-                layer.shadowColor = nil
-            }
-        }
+  }
+  @IBInspectable
+  var shadowRadius: CGFloat {
+    get {
+      return layer.shadowRadius
     }
+    set {
+      layer.shadowRadius = newValue
+    }
+  }
+  
+  @IBInspectable
+  var shadowOpacity: Float {
+    get {
+      return layer.shadowOpacity
+    }
+    set {
+      layer.shadowOpacity = newValue
+    }
+  }
+  
+  @IBInspectable
+  var shadowOffset: CGSize {
+    get {
+      return layer.shadowOffset
+    }
+    set {
+      layer.shadowOffset = newValue
+    }
+  }
+  
+  @IBInspectable
+  var shadowColor: UIColor? {
+    get {
+      if let color = layer.shadowColor {
+        return UIColor(cgColor: color)
+      }
+      return nil
+    }
+    set {
+      if let color = newValue {
+        layer.shadowColor = color.cgColor
+      } else {
+        layer.shadowColor = nil
+      }
+    }
+  }
 }
 
 
