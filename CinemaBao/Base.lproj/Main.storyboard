@@ -1165,6 +1165,15 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pKM-ME-hi2">
+                                        <rect key="frame" x="120" y="0.0" width="135" height="135"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addImageAvatar:" destination="iZp-vj-ylc" eventType="touchUpInside" id="JEN-xM-9P7"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FT2-3h-Pwu">
                                         <rect key="frame" x="176" y="143" width="193" height="38"/>
                                         <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="24"/>
@@ -1308,6 +1317,9 @@
                                     <constraint firstItem="jEl-9y-SX2" firstAttribute="leading" secondItem="q21-3c-UVD" secondAttribute="leading" id="9Yf-tg-CuE"/>
                                     <constraint firstItem="WhL-HK-rNi" firstAttribute="leading" secondItem="Qax-M3-xgV" secondAttribute="trailing" constant="25" id="BD3-Br-g40"/>
                                     <constraint firstItem="bUT-QR-Ivj" firstAttribute="trailing" secondItem="WhL-HK-rNi" secondAttribute="trailing" id="EhI-FF-D5A"/>
+                                    <constraint firstItem="pKM-ME-hi2" firstAttribute="trailing" secondItem="jEl-9y-SX2" secondAttribute="trailing" id="FnB-pn-DkZ"/>
+                                    <constraint firstItem="pKM-ME-hi2" firstAttribute="top" secondItem="jEl-9y-SX2" secondAttribute="top" id="H9k-N6-l8M"/>
+                                    <constraint firstItem="pKM-ME-hi2" firstAttribute="bottom" secondItem="jEl-9y-SX2" secondAttribute="bottom" id="IjG-MH-7Fc"/>
                                     <constraint firstItem="Qax-M3-xgV" firstAttribute="baseline" secondItem="WhL-HK-rNi" secondAttribute="firstBaseline" id="J2G-aI-NcS"/>
                                     <constraint firstAttribute="trailing" secondItem="bUT-QR-Ivj" secondAttribute="trailing" constant="25" id="KBJ-Z3-air"/>
                                     <constraint firstItem="feq-WB-yaS" firstAttribute="bottom" secondItem="q21-3c-UVD" secondAttribute="bottom" id="LjD-Ky-DV2"/>
@@ -1331,6 +1343,7 @@
                                     <constraint firstAttribute="trailing" secondItem="q21-3c-UVD" secondAttribute="trailing" constant="72" id="uPq-RX-SxC"/>
                                     <constraint firstItem="zAr-ed-7Ny" firstAttribute="centerY" secondItem="Rra-cL-iIa" secondAttribute="centerY" id="x9a-Qj-sbd"/>
                                     <constraint firstItem="zAr-ed-7Ny" firstAttribute="top" secondItem="bUT-QR-Ivj" secondAttribute="bottom" constant="30" id="xb8-vX-4T0"/>
+                                    <constraint firstItem="pKM-ME-hi2" firstAttribute="leading" secondItem="jEl-9y-SX2" secondAttribute="leading" id="xx3-0k-yJ4"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -2006,7 +2019,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="wMY-7K-WT2"/>
-        <segue reference="2en-CI-wVL"/>
+        <segue reference="NTs-D4-R33"/>
         <segue reference="knO-fJ-aBk"/>
         <segue reference="b6J-YV-Eqp"/>
         <segue reference="P5e-pC-kV1"/>

@@ -85,6 +85,7 @@ class SignUpViewController: UIViewController {
           SignInViewController.userDefault.set(info.user.name, forKey: "userName")
           SignInViewController.userDefault.set(info.user.email, forKey: "email")
           SignInViewController.userDefault.set(self.txtPasswordSignUP.text, forKey: "password")
+//          SignInViewController.userDefault.set(info.user.avatarURL, forKey: "avatarURL")
           self.performSegue(withIdentifier: "SignUpSuccessgGotoListFilmVC", sender: self)
         } else {
           let toast = Toast(text: info.message)

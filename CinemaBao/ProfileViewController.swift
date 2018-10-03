@@ -10,11 +10,13 @@ import UIKit
 import Alamofire
 import Toaster
 
-class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class ProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
   
   var listFavoriteMovie = [Movie]()
   var selectMovie = Movie()
   var username = ""
+  var imagePicker = UIImagePickerController()
+  let avatar = SignInViewController.userDefault.string(forKey: "avatarURL")
   
   lazy var refreshControl: UIRefreshControl = {
     let refreshControl = UIRefreshControl()
@@ -38,6 +40,7 @@ var token = SignInViewController.userDefault.string(forKey: "token")
           return
         }
         print(response)
+//        self.avatar = info.avatarURL
         SignInViewController.userDefault.set(info.name, forKey: "userName")
         self.lblUserName.text = info.name
       case .failure:
@@ -136,7 +139,22 @@ var token = SignInViewController.userDefault.string(forKey: "token")
     
 //    lblEmail.text = SignInViewController.userDefault.string(forKey: "userName")
   }
-  
+  var poster = UIImage()
+  @IBAction func addImageAvatar(_ sender: Any) {
+    
+    if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
+      print("Button capture")
+      
+      imagePicker.delegate = self
+      imagePicker.sourceType = .savedPhotosAlbum
+      imagePicker.allowsEditing = false
+      
+      self.present(imagePicker, animated: true, completion: nil)
+      
+    }
+    
+    
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -174,8 +192,35 @@ var token = SignInViewController.userDefault.string(forKey: "token")
       lblUserName.text = username
     }
     
+//    let header: HTTPHeaders = ["token": token!]
+//    let paramterUser: [String: String] = ["email": lblEmail.text!, "password": SignInViewController.userDefault.string(forKey: "password")!]
+    
+    
+    
+    
+//    print(avatar)
+    Alamofire.request("https://cinema-hatin.herokuapp.com" + avatar!).responseImage(completionHandler: { (response) in
+      print(response)
+    
+      switch response.result {
+      case .success:
+        if let image = response.result.value {
+          DispatchQueue.main.async {
+            self.viewProfileDefault.image = image
+          }
+        }
+      case .failure:
+        print("Error")
+        return
+      }
+    })
+    
+    
   }
 
+  override func viewWillAppear(_ animated: Bool) {
+    
+  }
   
   func fetchData() {
     let idUserDefault = SignInViewController.userDefault.string(forKey: "userNameID")
@@ -203,6 +248,7 @@ var token = SignInViewController.userDefault.string(forKey: "token")
       print("logOutGotoSignInVC")
     case "gotoResetPasswordVC":
       print("gotoResetPasswordVC")
+      print(token!)
     case "goDetailMovieinProfile":
       print("goDetailMovieinProfile")
       let destVC: FilmInfo = segue.destination as! FilmInfo
@@ -242,7 +288,39 @@ var token = SignInViewController.userDefault.string(forKey: "token")
     SignInViewController.userDefault.removeObject(forKey: "password")
   }
   
-  
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+      viewProfileDefault.image = pickedImage
+      poster = pickedImage
+      
+      let headers: HTTPHeaders = ["x-access-token": token!]
+      let urlChangeAvatar = URL(string: "https://cinema-hatin.herokuapp.com/api/user/change-avatar")
+      Alamofire.upload(multipartFormData: {(multipart) in
+        if let data = UIImageJPEGRepresentation(self.poster, 1.0) {
+          multipart.append(data, withName: "file", fileName: "imageBAo.jpeg", mimeType: "image/jpeg")
+        }
+        
+      }, usingThreshold: UInt64.init(), to: urlChangeAvatar!, method: .post, headers: headers) { (result) in
+        switch result {
+        case .success(let upload, _, _) :
+          upload.responseJSON { response in
+            debugPrint(response)
+          }
+          upload.uploadProgress{ print("--->", $0.fractionCompleted)}
+          print("Success")
+          let toast = Toast(text: "Đã thay đổi ảnh thành công")
+          toast.show()
+        case .failure(let encodingError):
+          print(encodingError)
+          print("Fail")
+        }
+      }
+      
+    }
+    
+
+    dismiss(animated: true, completion: nil)
+  }
   
 }
 

@@ -82,6 +82,7 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
     if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
       addImgMovie.image = pickedImage
       poster = pickedImage
+      
     }
     dismiss(animated: true, completion: nil)
   }
