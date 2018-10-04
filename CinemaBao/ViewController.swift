@@ -123,20 +123,20 @@ class ViewController: UIViewController {
 //        tableView.endRefreshing()
       
       
-      let param: [String: String] = ["token": SignInViewController.userDefault.string(forKey: "token")!]
-      //    let head: HTTPHeaders =
-      Alamofire.request("https://cinema-hatin.herokuapp.com/api/auth/user", method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: {(response) in
-        switch response.result {
-        case .success:
-          guard let info = try? JSONDecoder().decode(UserInfo.self, from: response.data!) else {
-            print("Error")
-            return
-          }
-          SignInViewController.userDefault.set(info.avatarURL, forKey: "avatarURL")
-        case .failure:
-          print("Error")
-        }
-      })
+//      let param: [String: String] = ["token": SignInViewController.userDefault.string(forKey: "token")!]
+//      //    let head: HTTPHeaders =
+//      Alamofire.request("https://cinema-hatin.herokuapp.com/api/auth/user", method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: {(response) in
+//        switch response.result {
+//        case .success:
+//          guard let info = try? JSONDecoder().decode(UserInfo.self, from: response.data!) else {
+//            print("Error")
+//            return
+//          }
+//          SignInViewController.userDefault.set(info.avatarURL, forKey: "avatarURL")
+//        case .failure:
+//          print("Error")
+//        }
+//      })
         
     }
     

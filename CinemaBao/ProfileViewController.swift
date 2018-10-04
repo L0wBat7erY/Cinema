@@ -43,6 +43,22 @@ var token = SignInViewController.userDefault.string(forKey: "token")
 //        self.avatar = info.avatarURL
         SignInViewController.userDefault.set(info.name, forKey: "userName")
         self.lblUserName.text = info.name
+        SignInViewController.userDefault.set(info.avatarURL, forKey: "avatarURL")
+        Alamofire.request("https://cinema-hatin.herokuapp.com" + info.avatarURL).responseImage(completionHandler: { (response) in
+          print(response)
+          
+          switch response.result {
+          case .success:
+            if let image = response.result.value {
+              DispatchQueue.main.async {
+                self.viewProfileDefault.image = image
+              }
+            }
+          case .failure:
+            print("Error")
+            return
+          }
+        })
       case .failure:
         print("Error")
       }
@@ -219,7 +235,21 @@ var token = SignInViewController.userDefault.string(forKey: "token")
   }
 
   override func viewWillAppear(_ animated: Bool) {
-    
+//    Alamofire.request("https://cinema-hatin.herokuapp.com" + avatar!).responseImage(completionHandler: { (response) in
+//      print(response)
+//
+//      switch response.result {
+//      case .success:
+//        if let image = response.result.value {
+//          DispatchQueue.main.async {
+//            self.viewProfileDefault.image = image
+//          }
+//        }
+//      case .failure:
+//        print("Error")
+//        return
+//      }
+//    })
   }
   
   func fetchData() {
