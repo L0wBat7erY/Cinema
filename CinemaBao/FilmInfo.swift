@@ -29,6 +29,7 @@ class FilmInfo: UIViewController {
   var token = SignInViewController.userDefault.string(forKey: "token")
   lazy var headers: HTTPHeaders = ["x-access-token": token!]
   var url = "https://cinema-hatin.herokuapp.com/api/cinema/delete"
+  var segueID = ""
   
   @IBAction func editMovieBtn(_ sender: Any) {
     self.performSegue(withIdentifier: "gotoFixDetailMovie", sender: self)
@@ -47,14 +48,13 @@ class FilmInfo: UIViewController {
       Alamofire.request(self.url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: self.headers).responseJSON(completionHandler: {(response) in
         switch response.result {
         case .success:
-          print(response)
-          guard let info = try? JSONDecoder().decode(ListInfoSignUp.self, from: response.data!) else {
-            print("Error")
-            return
-          }
-          let toast = Toast(text: info.message)
+          let toast = Toast(text: "Xóa phim thành công")
           toast.show()
-          self.performSegue(withIdentifier: "deleteSuccess", sender: self)
+          if self.segueID == "gotoDetailMovie" {
+            self.performSegue(withIdentifier: "deleteSuccess", sender: self)
+          } else {
+            self.performSegue(withIdentifier: "deleteMovieinProfileVC", sender: self)
+          }
         case .failure:
           print("Error")
         }
@@ -120,6 +120,8 @@ class FilmInfo: UIViewController {
       destVC.createDate = createDate.text!
     case "deleteSuccess":
       print("deleteSuccess")
+    case "deleteMovieinProfileVC":
+      print("deleteMovieinProfileVC")
     default:
       break
     }

@@ -56,7 +56,7 @@ class SignInViewController: UIViewController {
                 SignInViewController.userDefault.set(infoSignIn.user._id, forKey: "userNameID")
                 SignInViewController.userDefault.set(infoSignIn.user.name, forKey: "userName")
                 SignInViewController.userDefault.set(infoSignIn.user.email, forKey: "email")
-                SignInViewController.userDefault.set(infoSignIn.user.password, forKey: "password")
+                SignInViewController.userDefault.set(self.txtPasswordSignIN.text, forKey: "password")
                 SignInViewController.userDefault.set(infoSignIn.user.avatarURL, forKey: "avatarURL")
                 if (infoSignIn.status == 200) {
                     self.performSegue(withIdentifier: "SignInSuccess", sender: self)

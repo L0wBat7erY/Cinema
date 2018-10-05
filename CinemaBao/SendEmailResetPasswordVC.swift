@@ -32,7 +32,7 @@ class SendEmailResetPasswordVC: UIViewController {
       return
     }
     if isValidEmail(testStr: txtEmailinResetPasswordVC.text!) == false {
-      let toast = Toast(text: "Email không hợp lệ")
+      let toast = Toast(text: "Không tìm thấy tài khoản. Vui lòng kiểm tra lại")
       toast.show()
       return
     }
@@ -44,12 +44,17 @@ class SendEmailResetPasswordVC: UIViewController {
           print(response)
           let status = response.response?.statusCode
           if status == 200 {
-            let toast = Toast(text: "Gửi email thành công")
+            let toast = Toast(text: "Yêu cầu thay đổi mật khẩu thành công.Vui lòng kiểm tra email")
             toast.show()
             self.performSegue(withIdentifier: "resetPasswordsuccess", sender: self)
+          } else {
+            let toast = Toast(text: "Không tìm thấy tài khoản. Vui lòng kiểm tra lại")
+            toast.show()
           }
         case .failure:
           print("Fail")
+          let toast = Toast(text: "Lỗi")
+          toast.show()
         }
       })
     }

@@ -287,7 +287,7 @@
 				"${BUILT_PRODUCTS_DIR}/BFPaperButton/BFPaperButton.framework",
 				"${BUILT_PRODUCTS_DIR}/FontAwesome.swift/FontAwesome_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/HSDatePickerViewController/HSDatePickerViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/PullToRefresher/PullToRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Toaster/Toaster.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -297,7 +297,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BFPaperButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontAwesome_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HSDatePickerViewController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PullToRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toaster.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

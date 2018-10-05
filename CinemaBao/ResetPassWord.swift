@@ -54,8 +54,13 @@ class ResetPassWord: UIViewController {
       toast.show()
       return
     }
+    if oldPassword.text != SignInViewController.userDefault.string(forKey: "password") {
+      let toast = Toast(text: "Mật khẩu cũ không đúng")
+      toast.show()
+      return
+    }
     if newPassword.text == oldPassword.text {
-      let toast = Toast(text: "Bạn đang dùng lại mật khẩu cũ vui lòng nhập mật khẩu mới")
+      let toast = Toast(text: "Mật khẩu cũ và mật khẩu mới giống nhau")
       toast.show()
       return
     }
@@ -65,16 +70,15 @@ class ResetPassWord: UIViewController {
       switch response.result {
       case .success:
         print("Success")
-        guard let info = try? JSONDecoder().decode(ListInfoSignUp.self, from: response.data!) else {
-          print("Error")
-          return
-        }
-        if info.status == 200 {
-          let toast = Toast(text: info.message)
+        let status = response.response?.statusCode
+        if status == 200 {
+          print(SignInViewController.userDefault.string(forKey: "token")!)
+          let toast = Toast(text: "Đổi mật khẩu thành công")
           toast.show()
           self.performSegue(withIdentifier: "changePasswordSuccess", sender: self)
+          SignInViewController.userDefault.set(self.newPassword.text, forKey: "password")
         } else {
-          let toast = Toast(text: info.message)
+          let toast = Toast(text: "Lỗi")
           toast.show()
         }
         

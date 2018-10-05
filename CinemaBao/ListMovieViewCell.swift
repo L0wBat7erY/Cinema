@@ -8,7 +8,7 @@
 
 import UIKit
 import FontAwesome_swift
-import PullToRefresh
+import SDWebImage
 import Alamofire
 import AlamofireImage
 
@@ -43,6 +43,7 @@ class ListMovieViewCell: UITableViewCell {
         idPhim.text = movie.content
         theLoai.text = movie.genre
         tenPhim.text = movie.name
+      releaseMovie.text = convertTimestampToHumanDate(timestamp: movie.releaseDate)
         Alamofire.request("https://cinema-hatin.herokuapp.com" + movie.posterURL).responseImage(completionHandler: { (response) in
             print(response)
             switch response.result {
@@ -57,7 +58,8 @@ class ListMovieViewCell: UITableViewCell {
                 return
             }
         })
-        releaseMovie.text = convertTimestampToHumanDate(timestamp: movie.releaseDate)
+      let urlImage = URL("https://cinema-hatin.herokuapp.com" + movie.posterURL)
+      profileMovie.sd_setImage(with: urlImage, placeholderImage: "ProfileMovie")
     }
     
     func convertTimestampToHumanDate(timestamp: Double) -> String {

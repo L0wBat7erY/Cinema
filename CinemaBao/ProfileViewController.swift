@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
   var username = ""
   var imagePicker = UIImagePickerController()
   let avatar = SignInViewController.userDefault.string(forKey: "avatarURL")
+  lazy var str = randomString(length: 5)
   
   lazy var refreshControl: UIRefreshControl = {
     let refreshControl = UIRefreshControl()
@@ -94,12 +95,18 @@ var token = SignInViewController.userDefault.string(forKey: "token")
   }
   
   @IBAction func returnListMovieVC(_ sender: Any) {
-    dismiss(animated: true, completion: nil)
+    self.dismiss(animated: true, completion: nil)
   }
   
   @IBAction func resetPasswordBtn(_ sender: Any) {
     self.performSegue(withIdentifier: "gotoResetPasswordVC", sender: self)
   }
+  
+  @IBAction func createMovieInProfileVC(_ sender: Any) {
+    self.performSegue(withIdentifier: "createMovieinUserVC", sender: self)
+  }
+  
+  
   
   var email = SignInViewController.userDefault.string(forKey: "userName")
   
@@ -213,8 +220,8 @@ var token = SignInViewController.userDefault.string(forKey: "token")
     
     
     
-    
 //    print(avatar)
+    if avatar?.isEmpty == false {
     Alamofire.request("https://cinema-hatin.herokuapp.com" + avatar!).responseImage(completionHandler: { (response) in
       print(response)
     
@@ -230,7 +237,7 @@ var token = SignInViewController.userDefault.string(forKey: "token")
         return
       }
     })
-    
+    }
     
   }
 
@@ -250,6 +257,10 @@ var token = SignInViewController.userDefault.string(forKey: "token")
 //        return
 //      }
 //    })
+    
+    fetchData()
+    collectionViewMovie.reloadData()
+    
   }
   
   func fetchData() {
@@ -283,7 +294,8 @@ var token = SignInViewController.userDefault.string(forKey: "token")
       print("goDetailMovieinProfile")
       let destVC: FilmInfo = segue.destination as! FilmInfo
       destVC.dataFromHere = selectMovie
-      
+    case "createMovieinUserVC":
+      print("createMovieinUserVC")
     default:
       break
     }
@@ -327,7 +339,7 @@ var token = SignInViewController.userDefault.string(forKey: "token")
       let urlChangeAvatar = URL(string: "https://cinema-hatin.herokuapp.com/api/user/change-avatar")
       Alamofire.upload(multipartFormData: {(multipart) in
         if let data = UIImageJPEGRepresentation(self.poster, 1.0) {
-          multipart.append(data, withName: "file", fileName: "imageBAo.jpeg", mimeType: "image/jpeg")
+          multipart.append(data, withName: "file", fileName: self.str + ".jpeg", mimeType: "image/jpeg")
         }
         
       }, usingThreshold: UInt64.init(), to: urlChangeAvatar!, method: .post, headers: headers) { (result) in
@@ -350,6 +362,22 @@ var token = SignInViewController.userDefault.string(forKey: "token")
     
 
     dismiss(animated: true, completion: nil)
+  }
+  
+  func randomString(length: Int) -> String {
+    
+    let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    let len = UInt32(letters.length)
+    
+    var randomString = ""
+    
+    for _ in 0 ..< length {
+      let rand = arc4random_uniform(len)
+      var nextChar = letters.character(at: Int(rand))
+      randomString += NSString(characters: &nextChar, length: 1) as String
+    }
+    
+    return randomString
   }
   
 }

@@ -61,6 +61,7 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
     genrePK.isHidden = false
     self.view.endEditing(true)
   }
+  
   @IBAction func turnOffBtn(_ sender: Any) {
     genrePK.isHidden = true
     self.view.endEditing(true)
@@ -114,8 +115,8 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
     let dateStamp:TimeInterval = date!.timeIntervalSince1970
     let dateSt:Int = Int(dateStamp)
     
-    
-    
+//    addContent.
+    let str = randomString(length: 5)
     let url = URL(string: "https://cinema-hatin.herokuapp.com/api/cinema")
     let parameter: [String: Any] = ["name": addNameMovie.text!, "genre": addGenreMovie.text!, "releaseDate": dateSt, "content": addContent.text!, "creatorId": SignInViewController.userDefault.string(forKey: "userNameID")!]
     Alamofire.upload(multipartFormData: { (multipartFormData) in
@@ -123,7 +124,7 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
         multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
       }
       if let data = UIImageJPEGRepresentation(self.poster, 1.0) {
-        multipartFormData.append(data, withName: "file", fileName: "imageBao.jpeg", mimeType: "image/jpeg")
+        multipartFormData.append(data, withName: "file", fileName: str + ".jpeg", mimeType: "image/jpeg")
       }
     }, usingThreshold: UInt64.init(), to: url!, method: .post, headers: nil) { (result) in
       switch result {
@@ -198,6 +199,8 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
     addContent.layer.borderWidth = 1.0;
     addContent.layer.cornerRadius = 5.0;
     
+    
+    
     dateRelease.delegate = self
     
     let formatterDay = DateFormatter()
@@ -225,8 +228,45 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
     
     addImgMovie.image = UIImage(named: "ProfileMovie.png")
     
+//    NotificationCenter.default.addObserver(self, selector: #selector(AddNewMovie.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+//
+//    NotificationCenter.default.addObserver(self, selector: #selector(AddNewMovie.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+  }
+  
+  @objc func keyboardWillShow(notification: NSNotification) {
+    if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+      if self.view.frame.origin.y == 0{
+        self.view.frame.origin.y -= 258      }
+    }
+  }
+  
+  @objc func keyboardWillHide(notification: NSNotification) {
+    if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+      if self.view.frame.origin.y != 0{
+        self.view.frame.origin.y += 258
+      }
+    }
+    
+    
     // Do any additional setup after loading the view.
   }
+//
+//  @objc func keyboardWillShow(notification:NSNotification) {
+//    adjustingHeight(show: true, notification: notification)
+//  }
+//
+//  @objc func keyboardWillHide(notification:NSNotification) {
+//    adjustingHeight(show: false, notification: notification)
+//  }
+//
+//  override func viewWillDisappear(_ animated: Bool) {
+//    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+//    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+//  }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
@@ -242,7 +282,32 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
     default:
       break
     }
+    
   }
+  
+//  func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//    self.view.endEditing(true)
+//  }
+//
+//
+//
+//  func adjustingHeight(show:Bool, notification:NSNotification) {
+//    // 1
+//    var userInfo = notification.userInfo!
+//    // 2
+//    let keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+//    // 3
+//    let animationDurarion = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
+//    // 4
+//    let changeInHeight = (keyboardFrame.height + 40) * (show ? 1 : -1)
+//    //5
+//    UIView.animate(withDuration: animationDurarion, animations: { () -> Void in
+//      self.bottomContraint.constant += changeInHeight
+//    })
+//
+//
+//
+//  }
   
   func randomString(length: Int) -> String {
     

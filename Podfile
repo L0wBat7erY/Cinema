@@ -8,10 +8,10 @@ target 'CinemaBao' do
   # Pods for CinemaBao
   pod 'Alamofire', '~> 4.7'
     pod 'Toaster'
-    pod 'PullToRefresher'
     pod 'HSDatePickerViewController'
     pod 'BFPaperButton'
     pod 'FontAwesome.swift'
     pod 'AlamofireImage', '~> 3.4'
+    pod 'SDWebImage'
 
 end
