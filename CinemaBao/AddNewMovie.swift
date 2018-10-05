@@ -40,74 +40,37 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
   var checkSegue = ""
   var releaseDate = ""
   var createDate = ""
+  let dateRelease = HSDatePickerViewController()
   
   
   
-  @IBAction func chooseImgBtn(_ sender: Any) {
-    
-    if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
-      print("Button capture")
-      
-      imagePicker.delegate = self
-      imagePicker.sourceType = .savedPhotosAlbum
-      imagePicker.allowsEditing = false
-      
-      self.present(imagePicker, animated: true, completion: nil)
-      
-    }
-  }
-  
-  @IBAction func addGenreMovie(_ sender: UITextField) {
-    genrePK.isHidden = false
-    self.view.endEditing(true)
-  }
-  
-  @IBAction func turnOffBtn(_ sender: Any) {
-    genrePK.isHidden = true
-    self.view.endEditing(true)
-  }
+
   
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
     return listGenreMovie.count
   }
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    //    self.view.endEditing(true)
     return listGenreMovie[row]
   }
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    
     addGenreMovie.text = listGenreMovie[row]
   }
   
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-    if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-      addImgMovie.image = pickedImage
-      poster = pickedImage
-      
-    }
-    dismiss(animated: true, completion: nil)
-  }
   
-  func hsDatePickerPickedDate(_ date: Date!) {
-    let formatterDay = DateFormatter()
-    formatterDay.dateFormat = "dd/MM/yyyy"
-    addReleaseDate.text = formatterDay.string(from: date)
-  }
+
   
-  let dateRelease = HSDatePickerViewController()
   
-  @IBAction func datePK(_ sender: UITextField) {
-    present(dateRelease, animated: true, completion: nil)
-  }
+  
+
   
   
   @IBAction func addMovieBtn(_ sender: Any) {
+    
     if addNameMovie.text == "" {
       let toast = Toast(text: "Vui lòng nhập Tên phim")
       toast.show()
       return
     }
-    print("tao")
     
     let dfmatter = DateFormatter()
     dfmatter.dateFormat="dd/MM/yyyy"
@@ -115,7 +78,6 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
     let dateStamp:TimeInterval = date!.timeIntervalSince1970
     let dateSt:Int = Int(dateStamp)
     
-//    addContent.
     let str = randomString(length: 5)
     let url = URL(string: "https://cinema-hatin.herokuapp.com/api/cinema")
     let parameter: [String: Any] = ["name": addNameMovie.text!, "genre": addGenreMovie.text!, "releaseDate": dateSt, "content": addContent.text!, "creatorId": SignInViewController.userDefault.string(forKey: "userNameID")!]
@@ -147,8 +109,8 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
   }
   
   @IBAction func editMovieBtn(_ sender: Any) {
-//    dataInEdit
-    print("sua")
+
+    
     let dfmatter = DateFormatter()
     dfmatter.dateFormat="dd/MM/yyyy"
     let date = dfmatter.date(from: addReleaseDate.text!)
@@ -199,17 +161,13 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
     addContent.layer.borderWidth = 1.0;
     addContent.layer.cornerRadius = 5.0;
     
-    
-    
     dateRelease.delegate = self
     
     let formatterDay = DateFormatter()
     let dateNow = Date()
     formatterDay.dateFormat = "dd/MM/yyyy"
     addReleaseDate.text = formatterDay.string(from: dateNow)
-    
-    //      genrePK.isHidden = true
-    //      genrePK.isHidden = true
+
     genrePK.dataSource = self
     genrePK.delegate = self
     
@@ -224,28 +182,23 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
       editMoviebtn.isHidden = true
     }
     
-            addGenreMovie.text = "Action"
+    addGenreMovie.text = "Action"
     
     addImgMovie.image = UIImage(named: "ProfileMovie.png")
-    
-//    NotificationCenter.default.addObserver(self, selector: #selector(AddNewMovie.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//
-//    NotificationCenter.default.addObserver(self, selector: #selector(AddNewMovie.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    
     
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
   }
   
   @objc func keyboardWillShow(notification: NSNotification) {
-    if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+    if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
       if self.view.frame.origin.y == 0{
         self.view.frame.origin.y -= 258      }
     }
   }
   
   @objc func keyboardWillHide(notification: NSNotification) {
-    if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+    if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
       if self.view.frame.origin.y != 0{
         self.view.frame.origin.y += 258
       }
@@ -254,19 +207,6 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
     
     // Do any additional setup after loading the view.
   }
-//
-//  @objc func keyboardWillShow(notification:NSNotification) {
-//    adjustingHeight(show: true, notification: notification)
-//  }
-//
-//  @objc func keyboardWillHide(notification:NSNotification) {
-//    adjustingHeight(show: false, notification: notification)
-//  }
-//
-//  override func viewWillDisappear(_ animated: Bool) {
-//    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-//  }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
@@ -285,35 +225,18 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
     
   }
   
-//  func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//    self.view.endEditing(true)
-//  }
-//
-//
-//
-//  func adjustingHeight(show:Bool, notification:NSNotification) {
-//    // 1
-//    var userInfo = notification.userInfo!
-//    // 2
-//    let keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-//    // 3
-//    let animationDurarion = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
-//    // 4
-//    let changeInHeight = (keyboardFrame.height + 40) * (show ? 1 : -1)
-//    //5
-//    UIView.animate(withDuration: animationDurarion, animations: { () -> Void in
-//      self.bottomContraint.constant += changeInHeight
-//    })
-//
-//
-//
-//  }
+  
+  
+  
+  
+}
+
+extension AddNewMovie {
   
   func randomString(length: Int) -> String {
     
     let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
     let len = UInt32(letters.length)
-    
     var randomString = ""
     
     for _ in 0 ..< length {
@@ -321,8 +244,53 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
       var nextChar = letters.character(at: Int(rand))
       randomString += NSString(characters: &nextChar, length: 1) as String
     }
-    
     return randomString
   }
   
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+      addImgMovie.image = pickedImage
+      poster = pickedImage
+    }
+    dismiss(animated: true, completion: nil)
+  }
+  
+  func hsDatePickerPickedDate(_ date: Date!) {
+    let formatterDay = DateFormatter()
+    formatterDay.dateFormat = "dd/MM/yyyy"
+    addReleaseDate.text = formatterDay.string(from: date)
+  }
+
+}
+
+extension AddNewMovie {
+  
+  // 'Chọn ảnh' Button
+  @IBAction func chooseImgBtn(_ sender: Any) {
+    if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
+      print("Button capture")
+      
+      imagePicker.delegate = self
+      imagePicker.sourceType = .savedPhotosAlbum
+      imagePicker.allowsEditing = false
+      
+      self.present(imagePicker, animated: true, completion: nil)
+    }
+  }
+  
+  // When input Genre textfield
+  @IBAction func addGenreMovie(_ sender: UITextField) {
+    genrePK.isHidden = false
+    self.view.endEditing(true)
+  }
+  
+  
+  @IBAction func turnOffBtn(_ sender: Any) {
+    genrePK.isHidden = true
+    self.view.endEditing(true)
+  }
+  
+  @IBAction func datePK(_ sender: UITextField) {
+    present(dateRelease, animated: true, completion: nil)
+  }
 }

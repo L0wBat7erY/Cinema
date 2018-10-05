@@ -7,37 +7,24 @@
 //
 
 import UIKit
-import Alamofire
-import AlamofireImage
+import SDWebImage
 
 class MovieInUserDetailCell: UICollectionViewCell {
-
-    @IBOutlet weak var imageMovie: UIImageView!
+  
+  @IBOutlet weak var imageMovie: UIImageView!
   @IBOutlet weak var lblMovieName: UILabel!
   
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+  }
+  
+  
+  func setDatainCell(_ movie: Movie) {
+    lblMovieName?.text = movie.name
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-    
-
-    func setDatainCell(_ movie: Movie) {
-        lblMovieName?.text = movie.name
-        Alamofire.request("https://cinema-hatin.herokuapp.com" + movie.posterURL).responseImage(completionHandler: { (response) in
-            print(response)
-            switch response.result {
-            case .success:
-                if let image = response.result.value {
-                    DispatchQueue.main.async {
-                        self.imageMovie?.image = image
-                    }
-                }
-            case .failure:
-                print("Error")
-                return
-            }
-        })
-    }
-
+    let urlPosterURL = URL(string: "https://cinema-hatin.herokuapp.com" + movie.posterURL)
+    imageMovie.sd_setImage(with: urlPosterURL, placeholderImage: UIImage(named: "ProfileMovie"))
+  }
+  
 }

@@ -20,19 +20,43 @@ class ResetPassWord: UIViewController {
   @IBOutlet weak var newPassword: UITextField!
   @IBOutlet weak var confirmNewPassword: UITextField!
   
-    @IBAction func returnUserVC(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    // Do any additional setup after loading the view.
+  }
+  
+
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    switch segue.identifier {
+    case "changePasswordSuccess":
+      print("changePasswordSuccess")
+    default:
+      break
     }
+  }
+  
+}
+
+extension ResetPassWord {
+  
+  // 'Back' Button
+  @IBAction func returnUserVC(_ sender: Any) {
+    self.dismiss(animated: true, completion: nil)
+  }
+  
+  // Turn Off keyboard
   @IBAction func turnOffKeyboard(_ sender: Any) {
     self.view.endEditing(true)
   }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
   
+  // 'Xác nhận' Button
   @IBAction func confirmIsChane(_ sender: Any) {
     if oldPassword.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
       let toast = Toast(text: "Vui lòng nhập mật khẩu cũ")
@@ -88,18 +112,4 @@ class ResetPassWord: UIViewController {
     })
   }
   
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    switch segue.identifier {
-    case "changePasswordSuccess":
-      print("changePasswordSuccess")
-    default:
-      break
-    }
-  }
-
 }

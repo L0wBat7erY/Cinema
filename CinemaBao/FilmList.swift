@@ -8,20 +8,20 @@
 
 import Foundation
 
-
 struct FilmList: Codable {
-    var films = [Movie]()
-    
-    enum CodingKeys: String, CodingKey {
-        case films
-    }
-    
+  
+  var films = [Movie]()
+  
+  enum CodingKeys: String, CodingKey {
+    case films
+  }
+  
 }
 
 extension FilmList {
-    init(from decoder: Decoder) throws
-    {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        films = (try values.decodeIfPresent([Movie].self, forKey: .films)) ?? [Movie]()
-    }
+  init(from decoder: Decoder) throws
+  {
+    let values = try decoder.container(keyedBy: CodingKeys.self)
+    films = (try values.decodeIfPresent([Movie].self, forKey: .films)) ?? [Movie]()
+  }
 }

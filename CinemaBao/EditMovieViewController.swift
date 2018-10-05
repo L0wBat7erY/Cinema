@@ -10,10 +10,15 @@ import UIKit
 import Alamofire
 import AlamofireImage
 import HSDatePickerViewController
+import SDWebImage
 
 class EditMovieViewController: UIViewController, HSDatePickerViewControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
   
-
+  var dataInEditVC = Movie()
+  let dateReleaseVC = HSDatePickerViewController()
+  let listGenreMovie = ["Action", "Adventure", "Sci-fi", "Drama", "Cartoon"]
+  
+  
   @IBOutlet weak var genrePK: UIPickerView!
   @IBOutlet weak var txtNameMovie: UITextField!
   @IBOutlet weak var txtGenre: UITextField!
@@ -26,9 +31,7 @@ class EditMovieViewController: UIViewController, HSDatePickerViewControllerDeleg
     self.view.endEditing(true)
   }
   
-  var dataInEditVC = Movie()
-  let dateReleaseVC = HSDatePickerViewController()
-  let listGenreMovie = ["Action", "Adventure", "Sci-fi", "Drama", "Cartoon"]
+
   
   
   override func viewDidLoad() {
@@ -46,17 +49,19 @@ class EditMovieViewController: UIViewController, HSDatePickerViewControllerDeleg
     txtReleaseDate.text = ViewController().convertTimestampToHumanDate(timestamp: dataInEditVC.releaseDate)
     txtContent.text = dataInEditVC.content
     
-    Alamofire.request("https://cinema-hatin.herokuapp.com" + dataInEditVC.posterURL).responseImage { response in
-      switch response.result {
-      case .success:
-        if let image = response.result.value {
-          self.imgPosterMovie.image = image
-          //                    print("image downloaded: \(image)")
-        }
-      case .failure:
-        return
-      }
-    }
+//    Alamofire.request(url).responseImage { response in
+//      switch response.result {
+//      case .success:
+//        if let image = response.result.value {
+//          self.imgPosterMovie.image = image
+//        }
+//      case .failure:
+//        return
+//      }
+//    }
+    let url = URL(string: "https://cinema-hatin.herokuapp.com" + dataInEditVC.posterURL)
+    imgPosterMovie.sd_setImage(with: url, placeholderImage: UIImage(named: "ProfileMovie"))
+    
     // Do any additional setup after loading the view.
   }
   
@@ -76,11 +81,7 @@ class EditMovieViewController: UIViewController, HSDatePickerViewControllerDeleg
     
   }
   
-  func hsDatePickerPickedDate(_ date: Date!) {
-    let formatterDay = DateFormatter()
-    formatterDay.dateFormat = "dd/MM/yyyy"
-    txtReleaseDate.text = formatterDay.string(from: date)
-  }
+
   
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
@@ -96,5 +97,14 @@ class EditMovieViewController: UIViewController, HSDatePickerViewControllerDeleg
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     
     txtGenre.text = listGenreMovie[row]
+  }
+}
+
+extension EditMovieViewController {
+  
+  func hsDatePickerPickedDate(_ date: Date!) {
+    let formatterDay = DateFormatter()
+    formatterDay.dateFormat = "dd/MM/yyyy"
+    txtReleaseDate.text = formatterDay.string(from: date)
   }
 }

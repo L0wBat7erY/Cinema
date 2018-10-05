@@ -22,14 +22,60 @@ class SignUpViewController: UIViewController {
   @IBOutlet weak var iconEmailSignUp: UIImageView!
   @IBOutlet weak var iconPasswordSignUp: UIImageView!
   @IBOutlet weak var iconConfirmSignUp: UIImageView!
-  @IBAction func turnoffKeyboardBtn(_ sender: Any) {
-    self.view.endEditing(true)
+  
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    iconUserSignUp.image = UIImage.fontAwesomeIcon(name: .users, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
+    iconEmailSignUp.image = UIImage.fontAwesomeIcon(name: .envelope, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
+    iconPasswordSignUp.image = UIImage.fontAwesomeIcon(name: .lock, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
+    iconConfirmSignUp.image = UIImage.fontAwesomeIcon(name: .key, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
+    
+    lblSignUp.layer.borderColor = UIColor.green.cgColor
+    
+    // Do any additional setup after loading the view.
   }
   
   
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    switch segue.identifier {
+    case "gotoSignInVC":
+      print("gotoSignInVC")
+    case "SignUpSuccessgGotoListFilmVC":
+      print("SignUpSuccessgGotoListFilmVC")
+    default:
+      break
+    }
+  }
+  
+}
+
+extension SignUpViewController{
+  
+  //Check Email valid
+  func isValidEmail(testStr:String) -> Bool {
+    let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+    
+    let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+    return emailTest.evaluate(with: testStr)
+  }
+}
+
+extension SignUpViewController {
   
   @IBAction func signInBtn(_ sender: Any) {
     self.performSegue(withIdentifier: "gotoSignInVC", sender: self)
+  }
+  
+  @IBAction func turnoffKeyboardBtn(_ sender: Any) {
+    self.view.endEditing(true)
   }
   
   @IBAction func signUpBtn(_ sender: Any) {
@@ -37,23 +83,21 @@ class SignUpViewController: UIViewController {
     if txtUsernameSignUp.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
       let toast = Toast(text: "Vui lòng nhập Username")
       toast.show()
-      
       return
     }
     if isValidEmail(testStr: txtEmailSignUp.text!) == false {
       let toast = Toast(text: "Email không hợp lệ")
       toast.show()
+      return
     }
     if txtEmailSignUp.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
       let toast = Toast(text: "Vui lòng nhập email")
       toast.show()
-      
       return
     }
     if txtPasswordSignUP.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
       let toast = Toast(text: "Vui lòng nhập password")
       toast.show()
-      
       return
     }
     if txtConfirmSignUp.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
@@ -80,12 +124,14 @@ class SignUpViewController: UIViewController {
         if (info.status == 200) {
           let toast = Toast(text: "Đăng ký thành công")
           toast.show()
+          
+          // Save token, Email, ID user, Name User, password
           SignInViewController.userDefault.set(info.token, forKey: "token")
           SignInViewController.userDefault.set(info.user._id, forKey: "userNameID")
           SignInViewController.userDefault.set(info.user.name, forKey: "userName")
           SignInViewController.userDefault.set(info.user.email, forKey: "email")
           SignInViewController.userDefault.set(self.txtPasswordSignUP.text, forKey: "password")
-//          SignInViewController.userDefault.set(info.user.avatarURL, forKey: "avatarURL")
+          
           self.performSegue(withIdentifier: "SignUpSuccessgGotoListFilmVC", sender: self)
         } else {
           let toast = Toast(text: info.message)
@@ -99,52 +145,6 @@ class SignUpViewController: UIViewController {
       
     }
     )}
-  
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    
-    iconUserSignUp.image = UIImage.fontAwesomeIcon(name: .users, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
-    
-    iconEmailSignUp.image = UIImage.fontAwesomeIcon(name: .envelope, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
-    
-    iconPasswordSignUp.image = UIImage.fontAwesomeIcon(name: .lock, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
-    
-    iconConfirmSignUp.image = UIImage.fontAwesomeIcon(name: .key, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
-    
-    //        self.lblCinemaSignUp.layer.borderColor = UIColor.white.cgColor
-    lblSignUp.layer.borderColor = UIColor.green.cgColor
-    
-    
-    
-    // Do any additional setup after loading the view.
-  }
-  
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-  
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    switch segue.identifier {
-    case "gotoSignInVC":
-      print("gotoSignInVC")
-    case "SignUpSuccessgGotoListFilmVC":
-      print("SignUpSuccessgGotoListFilmVC")
-    default:
-      break
-    }
-  }
-  func isValidEmail(testStr:String) -> Bool {
-    // print("validate calendar: \(testStr)")
-    let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-    
-    let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-    return emailTest.evaluate(with: testStr)
-  }
 }
 
 extension UIView {

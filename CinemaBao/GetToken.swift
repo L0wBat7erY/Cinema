@@ -9,26 +9,26 @@
 import Foundation
 
 struct GetToken: Codable {
-    var token: String = ""
-    var user: UserInfo = UserInfo()
-    var status: Int = 0
-    var errorMessage: String = ""
-    
-    enum CodingKeys: String, CodingKey {
-        case token
-        case user
-        case status
-        case errorMessage
-    }
+  var token: String = ""
+  var user: UserInfo = UserInfo()
+  var status: Int = 0
+  var errorMessage: String = ""
+  
+  enum CodingKeys: String, CodingKey {
+    case token
+    case user
+    case status
+    case errorMessage
+  }
 }
 
 extension GetToken {
-    init(from decoder: Decoder) throws
-        {
-                let values = try decoder.container(keyedBy: CodingKeys.self)
-                token = (try values.decodeIfPresent(String.self, forKey: .token)) ?? ""
-                user = (try values.decodeIfPresent(UserInfo.self, forKey: .user)) ?? UserInfo()
-                status = (try values.decodeIfPresent(Int.self, forKey: .status)) ?? 0
-                errorMessage = (try values.decodeIfPresent(String.self, forKey: .errorMessage)) ?? ""
-        }
+  init(from decoder: Decoder) throws
+  {
+    let values = try decoder.container(keyedBy: CodingKeys.self)
+    token = (try values.decodeIfPresent(String.self, forKey: .token)) ?? ""
+    user = (try values.decodeIfPresent(UserInfo.self, forKey: .user)) ?? UserInfo()
+    status = (try values.decodeIfPresent(Int.self, forKey: .status)) ?? 0
+    errorMessage = (try values.decodeIfPresent(String.self, forKey: .errorMessage)) ?? ""
+  }
 }
