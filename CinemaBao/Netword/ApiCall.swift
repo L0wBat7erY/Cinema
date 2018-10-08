@@ -13,8 +13,7 @@ class ApiCall {
   
   // Call API and return Array List Movie
   class func getListMovies(url: URL, completion: @escaping (_ listFilm: [Movie]) -> Void) -> Void {
-    Alamofire.request(url)
-      .responseJSON { (reponse) in
+    Alamofire.request(url).responseJSON { (reponse) in
         guard let listFilm = try? JSONDecoder().decode(FilmList.self, from: reponse.data!) else {
           //lay du lieu khong thanh cong
           print("Error")

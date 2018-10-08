@@ -9,7 +9,6 @@
 import UIKit
 import Alamofire
 import AlamofireImage
-import MobileCoreServices
 
 class ViewController: UIViewController {
   
@@ -19,13 +18,14 @@ class ViewController: UIViewController {
   var selectedPhim = Movie()
   var idUserDefault = SignInViewController.userDefault.string(forKey: "userNameID")
   let token = SignInViewController.userDefault.string(forKey: "token")
+  var checkSegue = ""
   
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var addNewImg: UIButton!
   @IBOutlet weak var imgBtnProfile: UIButton!
   @IBOutlet weak var labelListMovie: UILabel!
   @IBOutlet weak var tableView: UITableView!
-
+  
   lazy var refreshControl: UIRefreshControl = {
     let refreshControl = UIRefreshControl()
     refreshControl.addTarget(self, action: #selector(updateListMovie(_:)), for: UIControlEvents.valueChanged)
@@ -55,19 +55,18 @@ class ViewController: UIViewController {
     tableView.reloadData()
     
     tableView.refreshControl = refreshControl
+    tableView.addSubview(refreshControl)
     
     if token == nil {
       imgBtnProfile.isHidden = true
-    }
-    else {
+    } else {
       imgBtnProfile.isHidden = false
     }
-    
+  
     fetchData()
     tableView.reloadData()
   }
   
-
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     
     switch segue.identifier! {
@@ -76,13 +75,12 @@ class ViewController: UIViewController {
     case "gotoAdMovieVCnoSignIn":
       print("gotoAddMovieVCSignIn")
     case "gotoDetailMovie":
-      let destVC: FilmInfo = segue.destination as! FilmInfo
+      let destVC: FilmInfoVC = segue.destination as! FilmInfoVC
       destVC.dataFromHere = selectedPhim
       destVC.segueID = "gotoDetailMovie"
     case "gotoDetailUser":
       print("gotoDetailUser")
       let destVC: ProfileViewController = segue.destination as! ProfileViewController
-      
       for phim in danhsachphim {
         if phim.user._id == idUserDefault {
           destVC.listFavoriteMovie.append(phim)
@@ -104,7 +102,6 @@ class ViewController: UIViewController {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-  
 }
 
 ///////////////////////////End Class/////////////////////////////////////////
@@ -132,8 +129,7 @@ extension ViewController {
       })
       alert.addAction(destroy)
       self.present(alert, animated: true)
-    }
-    else {
+    } else {
       self.performSegue(withIdentifier: "gotoAddMovieVCSignIn", sender: self)
     }
   }
@@ -144,30 +140,29 @@ extension ViewController {
   }
 }
 
+// MARK: - UITableViewDataSource
 extension ViewController: UITableViewDataSource {
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if searchIsTrue {
       return listMovietoSearch.count
-    }
-    else {
+    } else {
       return danhsachphim.count
     }
-    
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListMovieViewCell
     if searchIsTrue {
       cell.setDatainCell(listMovietoSearch[indexPath.row])
-    }
-    else {
+    } else {
       cell.setDatainCell(danhsachphim[indexPath.row])
-      
     }
     return cell
   }
 }
 
+// MARK: - UITableViewDelegate
 extension ViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 100
@@ -192,8 +187,7 @@ extension ViewController {
     if searchBar.text == "" || searchBar.text == nil {
       searchIsTrue = false
       tableView.reloadData()
-    }
-    else {
+    } else {
       searchIsTrue = true
       for _ in danhsachphim {
         listMovietoSearch = danhsachphim.filter({ (phim) -> Bool in

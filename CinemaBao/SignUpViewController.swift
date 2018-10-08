@@ -37,12 +37,10 @@ class SignUpViewController: UIViewController {
     // Do any additional setup after loading the view.
   }
   
-  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-  
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier {
@@ -54,17 +52,15 @@ class SignUpViewController: UIViewController {
       break
     }
   }
-  
 }
 
 ///////////////////////////End Class/////////////////////////////////////////
 
-extension SignUpViewController{
+extension SignUpViewController {
   
   // MARK: - Check valid Email
   func isValidEmail(testStr:String) -> Bool {
     let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-    
     let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
     return emailTest.evaluate(with: testStr)
   }
@@ -145,9 +141,7 @@ extension SignUpViewController {
       case .failure:
         let toast = Toast(text: "Đăng ký thất bại")
         toast.show()
-        
       }
-      
     }
     )}
 }
@@ -157,8 +151,7 @@ extension UIView {
   var cornerRadius: CGFloat {
     get {
       return layer.cornerRadius
-    }
-    set {
+    } set {
       layer.cornerRadius = newValue
     }
   }
@@ -166,8 +159,7 @@ extension UIView {
   var borderWidth: CGFloat {
     get {
       return layer.borderWidth
-    }
-    set {
+    } set {
       layer.borderWidth = newValue
     }
   }
@@ -178,8 +170,7 @@ extension UIView {
         return UIColor(cgColor: color)
       }
       return nil
-    }
-    set {
+    } set {
       if let color = newValue {
         layer.borderColor = color.cgColor
       } else {
@@ -191,8 +182,7 @@ extension UIView {
   var shadowRadius: CGFloat {
     get {
       return layer.shadowRadius
-    }
-    set {
+    } set {
       layer.shadowRadius = newValue
     }
   }
@@ -201,8 +191,7 @@ extension UIView {
   var shadowOpacity: Float {
     get {
       return layer.shadowOpacity
-    }
-    set {
+    } set {
       layer.shadowOpacity = newValue
     }
   }
@@ -211,8 +200,7 @@ extension UIView {
   var shadowOffset: CGSize {
     get {
       return layer.shadowOffset
-    }
-    set {
+    } set {
       layer.shadowOffset = newValue
     }
   }
@@ -224,8 +212,7 @@ extension UIView {
         return UIColor(cgColor: color)
       }
       return nil
-    }
-    set {
+    } set {
       if let color = newValue {
         layer.shadowColor = color.cgColor
       } else {

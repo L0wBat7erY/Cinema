@@ -10,7 +10,7 @@ import UIKit
 import Toaster
 import Alamofire
 
-class ResetPassWord: UIViewController {
+class ResetPassWordVC: UIViewController {
   
   var token = SignInViewController.userDefault.string(forKey: "token")
   lazy var headers: HTTPHeaders = ["x-access-token": token!]
@@ -41,13 +41,11 @@ class ResetPassWord: UIViewController {
       break
     }
   }
-  
 }
 
 ///////////////////////////End Class/////////////////////////////////////////
 
-
-extension ResetPassWord {
+extension ResetPassWordVC {
   
   // MARK: - 'Back' Button
   @IBAction func returnUserVC(_ sender: Any) {
@@ -95,6 +93,7 @@ extension ResetPassWord {
     let parameters: [String: Any] = ["oldPassword": oldPassword.text!, "newPassword": newPassword.text!]
     Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON(completionHandler: {(response) in
       switch response.result {
+        
       case .success:
         print("Success")
         let status = response.response?.statusCode
@@ -114,5 +113,4 @@ extension ResetPassWord {
       }
     })
   }
-  
 }

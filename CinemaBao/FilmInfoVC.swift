@@ -12,7 +12,7 @@ import Alamofire
 import Toaster
 import SDWebImage
 
-class FilmInfo: UIViewController {
+class FilmInfoVC: UIViewController {
   
   @IBOutlet weak var lblNameMovie: UILabel!
   @IBOutlet weak var lblGenre: UILabel!
@@ -63,7 +63,7 @@ class FilmInfo: UIViewController {
     switch segue.identifier {
     case "gotoFixDetailMovie":
       print("gotoFixDetailMovie")
-      let destVC: AddNewMovie = segue.destination as! AddNewMovie
+      let destVC: AddNewMovieVC = segue.destination as! AddNewMovieVC
       destVC.dataInEdit = dataFromHere
       destVC.checkSegue = "gotoFixDetailMovie"
       destVC.releaseDate = lblReleaseDate.text!
@@ -80,7 +80,7 @@ class FilmInfo: UIViewController {
 
 ///////////////////////////End Class///////////////////////////////////////////////
 
-extension FilmInfo {
+extension FilmInfoVC {
   
   //MARK: - Convert Timestamp to Human Date
   func convertTimestampToHumanDate(timestamp: Double) -> String {
@@ -92,7 +92,7 @@ extension FilmInfo {
   }
 }
 
-extension FilmInfo {
+extension FilmInfoVC {
   
   // MARK: - 'Sửa' Button
   @IBAction func editMovieBtn(_ sender: Any) {

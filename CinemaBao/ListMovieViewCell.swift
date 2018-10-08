@@ -22,7 +22,6 @@ class ListMovieViewCell: UITableViewCell {
   @IBOutlet weak var iconReleaseDate: UIImageView!
   @IBOutlet weak var tenPhim: UILabel!
   
-  
   override func awakeFromNib() {
     super.awakeFromNib()
     // Initialization code
@@ -30,7 +29,6 @@ class ListMovieViewCell: UITableViewCell {
     iconTheLoai.image = UIImage.fontAwesomeIcon(name: .video, style: .solid, textColor: .blue, size: CGSize(width: 30, height: 30))
     iconIDMovie.image = UIImage.fontAwesomeIcon(name: .info, style: .solid, textColor: .blue, size: CGSize(width: 30, height: 30))
     iconReleaseDate.image = UIImage.fontAwesomeIcon(name: .calendar, style: .solid, textColor: .blue, size: CGSize(width: 30, height: 30))
-    
   }
   
   override func setSelected(_ selected: Bool, animated: Bool) {
@@ -58,6 +56,4 @@ class ListMovieViewCell: UITableViewCell {
     let strDate = formatterDate.string(from: date)
     return strDate
   }
-  
-  
 }

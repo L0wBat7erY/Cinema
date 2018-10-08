@@ -18,7 +18,6 @@ class EditMovieViewController: UIViewController, HSDatePickerViewControllerDeleg
   let dateReleaseVC = HSDatePickerViewController()
   let listGenreMovie = ["Action", "Adventure", "Sci-fi", "Drama", "Cartoon"]
   
-  
   @IBOutlet weak var genrePK: UIPickerView!
   @IBOutlet weak var txtNameMovie: UITextField!
   @IBOutlet weak var txtGenre: UITextField!
@@ -33,7 +32,7 @@ class EditMovieViewController: UIViewController, HSDatePickerViewControllerDeleg
   
 
   
-  
+  // MARK: - View Did Load
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -48,17 +47,7 @@ class EditMovieViewController: UIViewController, HSDatePickerViewControllerDeleg
     txtGenre.text = dataInEditVC.genre
     txtReleaseDate.text = ViewController().convertTimestampToHumanDate(timestamp: dataInEditVC.releaseDate)
     txtContent.text = dataInEditVC.content
-    
-//    Alamofire.request(url).responseImage { response in
-//      switch response.result {
-//      case .success:
-//        if let image = response.result.value {
-//          self.imgPosterMovie.image = image
-//        }
-//      case .failure:
-//        return
-//      }
-//    }
+
     let url = URL(string: "https://cinema-hatin.herokuapp.com" + dataInEditVC.posterURL)
     imgPosterMovie.sd_setImage(with: url, placeholderImage: UIImage(named: "ProfileMovie"))
     

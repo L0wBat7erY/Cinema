@@ -20,7 +20,6 @@ class SignInViewController: UIViewController {
   @IBOutlet weak var txtEmailSignIn: UITextField!
   @IBOutlet weak var txtPasswordSignIN: UITextField!
   
-  
   // MARK: - View Did Load
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -51,12 +50,11 @@ class SignInViewController: UIViewController {
       break
     }
   }
-
 }
 
 ///////////////////////////End Class/////////////////////////////////////////
 
-extension SignInViewController{
+extension SignInViewController {
   
   // MARK: - 'Đăng nhập' Button
   @IBAction func loginSuccessListMovie(_ sender: Any) {

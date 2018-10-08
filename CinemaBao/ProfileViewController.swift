@@ -25,7 +25,6 @@ class ProfileViewController: UIViewController {
   var email = SignInViewController.userDefault.string(forKey: "userName")
   var poster = UIImage()
   
-  
   @IBOutlet weak var viewProfileDefault: UIImageView!
   @IBOutlet weak var scrollView: UIScrollView!
   @IBOutlet weak var iconEmail: UIImageView!
@@ -34,14 +33,12 @@ class ProfileViewController: UIViewController {
   @IBOutlet weak var lblUserName: UILabel!
   @IBOutlet weak var collectionViewMovie: UICollectionView!
   
-  
   lazy var refreshControl: UIRefreshControl = {
     let refreshControl = UIRefreshControl()
     refreshControl.addTarget(self, action: #selector(updateProfile(_:)), for: UIControlEvents.valueChanged)
     refreshControl.tintColor = UIColor.white
     return refreshControl
   }()
-  
   
   // MARK: - Refresh Control
   @objc func updateProfile (_ refreshControl: UIRefreshControl) {
@@ -70,7 +67,6 @@ class ProfileViewController: UIViewController {
     refreshControl.endRefreshing()
   }
   
-
   // MARK: - View Did Load
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -79,14 +75,12 @@ class ProfileViewController: UIViewController {
     iconEmail.image = UIImage.fontAwesomeIcon(name: .envelope, style: .solid, textColor: .white, size: CGSize(width: 30, height: 30))
     if SignInViewController.userDefault.string(forKey: "email") == nil {
       lblEmail.text = "UserName@mail.com"
-    }
-    else {
+    } else {
       lblEmail.text = SignInViewController.userDefault.string(forKey: "email")
     }
     if SignInViewController.userDefault.string(forKey: "userName") == nil {
       lblUserName.text = "Name"
-    }
-    else {
+    } else {
       lblUserName.text = SignInViewController.userDefault.string(forKey: "userName")
     }
     
@@ -106,17 +100,13 @@ class ProfileViewController: UIViewController {
     if username != SignInViewController.userDefault.string(forKey: "userName") , username != "" {
       lblUserName.text = username
     }
-    
     let urlAvatar = URL(string: "https://cinema-hatin.herokuapp.com" + avatar!)
     viewProfileDefault.sd_setImage(with: urlAvatar, placeholderImage: UIImage(named: "ProfileMovie"))
-    
   }
-  
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
-    
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -128,7 +118,7 @@ class ProfileViewController: UIViewController {
       print(token!)
     case "goDetailMovieinProfile":
       print("goDetailMovieinProfile")
-      let destVC: FilmInfo = segue.destination as! FilmInfo
+      let destVC: FilmInfoVC = segue.destination as! FilmInfoVC
       destVC.dataFromHere = selectMovie
     case "createMovieinUserVC":
       print("createMovieinUserVC")
@@ -138,9 +128,7 @@ class ProfileViewController: UIViewController {
       break
     }
   }
-  
 }
-
 
 ///////////////////////////End Class/////////////////////////////////////////
 
@@ -148,7 +136,6 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    
     return listFavoriteMovie.count
   }
   
@@ -167,7 +154,6 @@ extension ProfileViewController: UICollectionViewDelegate {
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
     selectMovie = listFavoriteMovie[indexPath.item]
     self.performSegue(withIdentifier: "goDetailMovieinProfile", sender: self)
   }
@@ -187,9 +173,9 @@ extension ProfileViewController: UIImagePickerControllerDelegate {
         if let data = UIImageJPEGRepresentation(self.poster, 1.0) {
           multipart.append(data, withName: "file", fileName: self.str + ".jpeg", mimeType: "image/jpeg")
         }
-        
       }, usingThreshold: UInt64.init(), to: urlChangeAvatar!, method: .post, headers: headers) { (result) in
         switch result {
+          
         case .success(let upload, _, _) :
           upload.responseJSON { response in
             debugPrint(response)
@@ -201,24 +187,21 @@ extension ProfileViewController: UIImagePickerControllerDelegate {
           toast.show()
           self.avatar1 = "/images/" + self.str + ".jpeg"
           SignInViewController.userDefault.set(self.avatar1, forKey: "avatarURL")
+          
         case .failure(let encodingError):
           print(encodingError)
           print("Fail")
         }
       }
-      
     }
-    
     dismiss(animated: true, completion: nil)
   }
 }
-
 
 extension ProfileViewController {
   
   // MARK: - Function create a random string
   func randomString(length: Int) -> String {
-    
     let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
     let len = UInt32(letters.length)
     var randomString = ""
@@ -228,7 +211,6 @@ extension ProfileViewController {
       var nextChar = letters.character(at: Int(rand))
       randomString += NSString(characters: &nextChar, length: 1) as String
     }
-    
     return randomString
   }
   
@@ -276,7 +258,6 @@ extension ProfileViewController: UINavigationControllerDelegate {
   
   // MARK: - 'Chọn ảnh' Button
   @IBAction func addImageAvatar(_ sender: Any) {
-    
     if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
       print("Button capture")
       
@@ -285,7 +266,6 @@ extension ProfileViewController: UINavigationControllerDelegate {
       imagePicker.allowsEditing = false
       
       self.present(imagePicker, animated: true, completion: nil)
-      
     }
   }
   
@@ -295,10 +275,8 @@ extension ProfileViewController: UINavigationControllerDelegate {
     let alert = UIAlertController(title: "Name", message: "Bạn muốn đổi Username?", preferredStyle: .alert)
     let noAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
     let yesAction = UIAlertAction(title: "OK", style: .default, handler: { action in
+      
       let txtField = alert.textFields![0]
-      
-      print(txtField.text!)
-      
       let url = "https://cinema-hatin.herokuapp.com/api/user/edit"
       let parameter: [String: String] = ["name": txtField.text!]
       let token = SignInViewController.userDefault.string(forKey: "token")
@@ -326,7 +304,6 @@ extension ProfileViewController: UINavigationControllerDelegate {
           print("Error")
         }
       })
-      
     })
     alert.addTextField(configurationHandler: {(textField: UITextField) in
       textField.keyboardAppearance = .dark
@@ -339,7 +316,6 @@ extension ProfileViewController: UINavigationControllerDelegate {
     alert.addAction(noAction)
     alert.addAction(yesAction)
     present(alert, animated: true)
-    
   }
   
   // MARK: - 'Đăng xuất' Button
@@ -351,9 +327,7 @@ extension ProfileViewController: UINavigationControllerDelegate {
     alert.addAction(UIAlertAction(title: "Có", style: .default, handler: { action in
       self.performSegue(withIdentifier: "logOutGotoSignInVC", sender: self)
       self.removeEverythingUserDefault()
-      
     }))
-    
     present(alert, animated: true, completion: nil)
   }
 }

@@ -17,7 +17,6 @@ class SendEmailResetPasswordVC: UIViewController {
   @IBOutlet weak var txtEmailinResetPasswordVC: UITextField!
   @IBOutlet weak var iconEmail: UIImageView!
   
-
   // MARK: - View Did Load
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -42,7 +41,6 @@ class SendEmailResetPasswordVC: UIViewController {
       break
     }
   }
-
 }
 
 extension SendEmailResetPasswordVC {
@@ -79,9 +77,12 @@ extension SendEmailResetPasswordVC {
       toast.show()
       return
     }
+    
+    // Call API
     let parameters: [String: String] = ["email": txtEmailinResetPasswordVC.text!]
     Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: {(response) in
       switch response.result {
+        
       case .success:
         print("Success")
         print(response)
@@ -94,6 +95,7 @@ extension SendEmailResetPasswordVC {
           let toast = Toast(text: "Không tìm thấy tài khoản. Vui lòng kiểm tra lại")
           toast.show()
         }
+        
       case .failure:
         print("Fail")
         let toast = Toast(text: "Lỗi")
@@ -101,5 +103,4 @@ extension SendEmailResetPasswordVC {
       }
     })
   }
-
 }

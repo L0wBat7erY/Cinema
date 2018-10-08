@@ -14,11 +14,9 @@ class MovieInUserDetailCell: UICollectionViewCell {
   @IBOutlet weak var imageMovie: UIImageView!
   @IBOutlet weak var lblMovieName: UILabel!
   
-  
   override func awakeFromNib() {
     super.awakeFromNib()
   }
-  
   
   func setDatainCell(_ movie: Movie) {
     lblMovieName?.text = movie.name
