@@ -2053,11 +2053,10 @@
         <image name="ProfileMovie" width="320" height="320"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DYL-Hk-s2h"/>
-        <segue reference="wMY-7K-WT2"/>
-        <segue reference="vn8-sd-DzQ"/>
+        <segue reference="XT2-Kf-spG"/>
+        <segue reference="NTs-D4-R33"/>
         <segue reference="itK-A6-c5x"/>
         <segue reference="TPq-dr-7YU"/>
-        <segue reference="P5e-pC-kV1"/>
+        <segue reference="HbW-GZ-hq8"/>
     </inferredMetricsTieBreakers>
 </document>

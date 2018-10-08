@@ -9,13 +9,11 @@
 import Foundation
 
 struct FilmList: Codable {
-  
   var films = [Movie]()
   
   enum CodingKeys: String, CodingKey {
     case films
   }
-  
 }
 
 extension FilmList {

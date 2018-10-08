@@ -14,7 +14,6 @@ struct CreateCinema: Codable {
     enum CodingKeys: String, CodingKey {
         case cinema
     }
-    
 }
 
 extension CreateCinema {

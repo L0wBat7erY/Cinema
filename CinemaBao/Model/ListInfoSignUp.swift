@@ -14,14 +14,12 @@ struct ListInfoSignUp: Codable {
   var status = Int()
   var token = ""
   
-  
   enum CodingKeys: String, CodingKey {
     case user
     case status
     case message
     case token
   }
-  
 }
 
 extension ListInfoSignUp {

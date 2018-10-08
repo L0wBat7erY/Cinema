@@ -9,7 +9,6 @@
 import UIKit
 import FontAwesome_swift
 import SDWebImage
-import Alamofire
 
 class ListMovieViewCell: UITableViewCell {
   

@@ -62,7 +62,7 @@ class ViewController: UIViewController {
     } else {
       imgBtnProfile.isHidden = false
     }
-  
+    
     fetchData()
     tableView.reloadData()
   }
@@ -89,7 +89,6 @@ class ViewController: UIViewController {
     default:
       break
     }
-    
   }
   
   // MARK: - View will Appear
@@ -116,7 +115,6 @@ extension ViewController {
   
   // MARK: - Press 'Tạo phim' button go to View 'Danh sách phim'
   @IBAction func addNewMovieBtn(_ sender: Any) {
-    
     if SignInViewController.userDefault.string(forKey: "token") == nil {
       let alert = UIAlertController(title: "Đăng nhập", message: "Bạn có muốn đăng nhập để tạo phim?", preferredStyle: .alert)
       let cancelAction = UIAlertAction(title: "Hủy", style: .destructive, handler: nil)
