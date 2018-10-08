@@ -16,7 +16,8 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
   var selectMovie = Movie()
   var username = ""
   var imagePicker = UIImagePickerController()
-  let avatar = SignInViewController.userDefault.string(forKey: "avatarURL")
+  var avatar = SignInViewController.userDefault.string(forKey: "avatarURL")
+  var avatar1 = ""
   lazy var str = randomString(length: 5)
   
   lazy var refreshControl: UIRefreshControl = {
@@ -134,8 +135,8 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
             let toast = Toast(text: "Đổi tên thành công")
             self.lblUserName.text = txtField.text
             toast.show()
+            SignInViewController.userDefault.set(txtField.text, forKey: "userName")
             
-            //            SignInViewController.userDefault.set(info.user.name, forKey: "userName")
           } else {
             let toast = Toast(text: info.message)
             toast.show()
@@ -209,59 +210,61 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
     //    print("\(listFavoriteMovie[0]._id)")
     
     scrollView.contentSize.height = 580
+    
+    fetchData()
+    collectionViewMovie.reloadData()
+    
     scrollView.refreshControl = refreshControl
     
     if username != SignInViewController.userDefault.string(forKey: "userName") , username != "" {
       lblUserName.text = username
     }
     
+    if avatar1 != "" {
+      avatar = avatar1
+    }
+    let urlAvatar = URL(string: "https://cinema-hatin.herokuapp.com" + avatar!)
+    viewProfileDefault.sd_setImage(with: urlAvatar, placeholderImage: UIImage(named: "ProfileMovie"))
     //    let header: HTTPHeaders = ["token": token!]
     //    let paramterUser: [String: String] = ["email": lblEmail.text!, "password": SignInViewController.userDefault.string(forKey: "password")!]
     
     
     
     //    print(avatar)
-    if avatar?.isEmpty == false {
-      Alamofire.request("https://cinema-hatin.herokuapp.com" + avatar!).responseImage(completionHandler: { (response) in
-        print(response)
-        
-        switch response.result {
-        case .success:
-          if let image = response.result.value {
-            DispatchQueue.main.async {
-              self.viewProfileDefault.image = image
-            }
-          }
-        case .failure:
-          print("Error")
-          return
-        }
-      })
-    }
+//    if avatar?.isEmpty == false {
+//      Alamofire.request("https://cinema-hatin.herokuapp.com" + avatar!).responseImage(completionHandler: { (response) in
+//        print(response)
+//
+//        switch response.result {
+//        case .success:
+//          if let image = response.result.value {
+//            DispatchQueue.main.async {
+//              self.viewProfileDefault.image = image
+//            }
+//          }
+//        case .failure:
+//          print("Error")
+//          return
+//        }
+//      })
+//    }
     
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    //    Alamofire.request("https://cinema-hatin.herokuapp.com" + avatar!).responseImage(completionHandler: { (response) in
-    //      print(response)
-    //
-    //      switch response.result {
-    //      case .success:
-    //        if let image = response.result.value {
-    //          DispatchQueue.main.async {
-    //            self.viewProfileDefault.image = image
-    //          }
-    //        }
-    //      case .failure:
-    //        print("Error")
-    //        return
-    //      }
-    //    })
-    
-    fetchData()
-    collectionViewMovie.reloadData()
-    
-  }
+//  override func viewWillAppear(_ animated: Bool) {
+//
+//
+//    if avatar == SignInViewController.userDefault.string(forKey: "avatarURL") {
+//      avatar = listFavoriteMovie[0].user.avatarURL
+//      return
+//    } else if avatar == listFavoriteMovie[0].user.avatarURL {
+//      let urlAvatar = URL(string: "https://cinema-hatin.herokuapp.com" + avatar!)
+//      viewProfileDefault.sd_setImage(with: urlAvatar, placeholderImage: UIImage(named: "ProfileMovie"))
+//    }
+//
+//    fetchData()
+//    collectionViewMovie.reloadData()
+//  }
   
   func fetchData() {
     let idUserDefault = SignInViewController.userDefault.string(forKey: "userNameID")
@@ -275,6 +278,8 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
       }
     }
   }
+  
+  
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
@@ -352,8 +357,11 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
           }
           upload.uploadProgress{ print("--->", $0.fractionCompleted)}
           print("Success")
+          
           let toast = Toast(text: "Đã thay đổi ảnh thành công")
           toast.show()
+          self.avatar1 = "/images/" + self.str + ".jpeg"
+          SignInViewController.userDefault.set(self.avatar1, forKey: "avatarURL")
         case .failure(let encodingError):
           print(encodingError)
           print("Fail")
@@ -361,7 +369,6 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
       }
       
     }
-    
     
     dismiss(animated: true, completion: nil)
   }

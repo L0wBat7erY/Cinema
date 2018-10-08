@@ -12,7 +12,7 @@ import Alamofire
 import AlamofireImage
 import HSDatePickerViewController
 
-class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, HSDatePickerViewControllerDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class AddNewMovie: UIViewController, UINavigationControllerDelegate, HSDatePickerViewControllerDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
   }
@@ -41,6 +41,7 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
   var releaseDate = ""
   var createDate = ""
   let dateRelease = HSDatePickerViewController()
+  
   
   
   
@@ -178,13 +179,17 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, UIImagePick
       addContent.text = dataInEdit.content
       addReleaseDate.text = createDate
       editMoviebtn.isHidden = false
+      
+      let urlposter = URL(string: "https://cinema-hatin.herokuapp.com" + dataInEdit.posterURL)
+      addImgMovie.sd_setImage(with: urlposter, placeholderImage: UIImage(named: "ProfileMovie"))
+      
     } else {
       editMoviebtn.isHidden = true
+      let urlposter = URL(string: "https://cinema-hatin.herokuapp.com" + dataInEdit.posterURL)
+      addImgMovie.sd_setImage(with: urlposter, placeholderImage: UIImage(named: "ProfileMovie"))
     }
     
     addGenreMovie.text = "Action"
-    
-    addImgMovie.image = UIImage(named: "ProfileMovie.png")
     
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -247,13 +252,7 @@ extension AddNewMovie {
     return randomString
   }
   
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-    if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-      addImgMovie.image = pickedImage
-      poster = pickedImage
-    }
-    dismiss(animated: true, completion: nil)
-  }
+
   
   func hsDatePickerPickedDate(_ date: Date!) {
     let formatterDay = DateFormatter()
@@ -292,5 +291,16 @@ extension AddNewMovie {
   
   @IBAction func datePK(_ sender: UITextField) {
     present(dateRelease, animated: true, completion: nil)
+  }
+}
+
+extension AddNewMovie: UIImagePickerControllerDelegate {
+  
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+      addImgMovie.image = pickedImage
+      poster = pickedImage
+    }
+    dismiss(animated: true, completion: nil)
   }
 }

@@ -40,7 +40,7 @@ class FilmInfo: UIViewController {
     lblGenre.text = dataFromHere.genre
     lblReleaseDate.text = ViewController().convertTimestampToHumanDate(timestamp: dataFromHere.releaseDate)
     lblContent.text = dataFromHere.content
-    createDate.text = ViewController().convertTimestampToHumanDate(timestamp: dataFromHere.createdDate)
+    createDate.text = ViewController().convertTimestampToHumanDate(timestamp: dataFromHere.createdDate/1000)
     creator.text = dataFromHere.user.name
     
     let urlImage = URL(string: url + dataFromHere.posterURL)

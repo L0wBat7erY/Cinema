@@ -51,6 +51,10 @@ class ViewController: UIViewController {
     addNewImg.layer.cornerRadius = 30
     imgBtnProfile.layer.cornerRadius = 30
     
+    fetchData()
+    //    fetchData()
+    tableView.reloadData()
+    
     tableView.refreshControl = refreshControl
     
     if token == nil {
@@ -61,6 +65,8 @@ class ViewController: UIViewController {
     }
     
     fetchData()
+//    fetchData()
+    tableView.reloadData()
   }
   
 
@@ -90,7 +96,7 @@ class ViewController: UIViewController {
     
   }
   
-  // View will Appear
+//   View will Appear
   override func viewWillAppear(_ animated: Bool) {
     fetchData()
     tableView.reloadData()

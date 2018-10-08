@@ -17,7 +17,7 @@ struct Movie: Codable {
   var user: UserInfo = UserInfo()
   var posterURL: String = ""
   var releaseDate: Double = 0
-  var createdDate: Double = 0
+  var createdDate: Double = 0.00
   
   enum CodingKeys: String, CodingKey {
     case _id
