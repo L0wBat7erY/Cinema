@@ -53,6 +53,8 @@ class SignInViewController: UIViewController {
 
 }
 
+///////////////////////////End Class/////////////////////////////////////////
+
 extension SignInViewController{
   
   // 'Đăng nhập' Button

@@ -44,6 +44,9 @@ class ResetPassWord: UIViewController {
   
 }
 
+///////////////////////////End Class/////////////////////////////////////////
+
+
 extension ResetPassWord {
   
   // 'Back' Button

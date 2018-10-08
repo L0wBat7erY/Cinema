@@ -57,6 +57,8 @@ class SignUpViewController: UIViewController {
   
 }
 
+///////////////////////////End Class/////////////////////////////////////////
+
 extension SignUpViewController{
   
   //Check Email valid

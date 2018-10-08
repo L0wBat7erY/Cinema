@@ -78,6 +78,8 @@ class FilmInfo: UIViewController {
   }
 }
 
+///////////////////////////End Class///////////////////////////////////////////////
+
 extension FilmInfo {
   func convertTimestampToHumanDate(timestamp: Double) -> String {
     let date = Date(timeIntervalSince1970: timestamp)

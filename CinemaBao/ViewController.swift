@@ -52,7 +52,6 @@ class ViewController: UIViewController {
     imgBtnProfile.layer.cornerRadius = 30
     
     fetchData()
-    //    fetchData()
     tableView.reloadData()
     
     tableView.refreshControl = refreshControl
@@ -65,7 +64,6 @@ class ViewController: UIViewController {
     }
     
     fetchData()
-//    fetchData()
     tableView.reloadData()
   }
   
@@ -144,7 +142,6 @@ extension ViewController {
   @IBAction func turnOffKeyboard(_ sender: Any) {
     self.view.endEditing(true)
   }
-  
 }
 
 extension ViewController: UITableViewDataSource {

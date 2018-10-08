@@ -26,5 +26,4 @@ class MovieInUserDetailCell: UICollectionViewCell {
     let urlPosterURL = URL(string: "https://cinema-hatin.herokuapp.com" + movie.posterURL)
     imageMovie.sd_setImage(with: urlPosterURL, placeholderImage: UIImage(named: "ProfileMovie"))
   }
-  
 }

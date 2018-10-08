@@ -12,16 +12,17 @@ import Alamofire
 import AlamofireImage
 import HSDatePickerViewController
 
-class AddNewMovie: UIViewController, UINavigationControllerDelegate, HSDatePickerViewControllerDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
-  func numberOfComponents(in pickerView: UIPickerView) -> Int {
-    return 1
-  }
-  
-  @IBAction func turnBackListMovie(_ sender: Any) {
-    self.navigationController?.popViewController(animated: true)
-    self.dismiss(animated: true, completion: nil)
-  }
-  
+class AddNewMovie: UIViewController  {
+
+  let listGenreMovie = ["Action", "Adventure", "Sci-fi", "Drama", "Cartoon"]
+  var imagePicker = UIImagePickerController()
+  var poster = UIImage()
+  var dataInEdit = Movie()
+  var checkSegue = ""
+  var releaseDate = ""
+  var createDate = ""
+  let dateRelease = HSDatePickerViewController()
+
   
   @IBOutlet weak var genrePK: UIPickerView!
   @IBOutlet weak var addImgMovie: UIImageView!
@@ -32,125 +33,6 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, HSDatePicke
   @IBOutlet weak var addGenreMovie: UITextField!
   @IBOutlet weak var lblThemPhim: UILabel!
   @IBOutlet weak var editMoviebtn: UIButton!
-  
-  let listGenreMovie = ["Action", "Adventure", "Sci-fi", "Drama", "Cartoon"]
-  var imagePicker = UIImagePickerController()
-  var poster = UIImage()
-  var dataInEdit = Movie()
-  var checkSegue = ""
-  var releaseDate = ""
-  var createDate = ""
-  let dateRelease = HSDatePickerViewController()
-  
-  
-  
-  
-
-  
-  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return listGenreMovie.count
-  }
-  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return listGenreMovie[row]
-  }
-  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    addGenreMovie.text = listGenreMovie[row]
-  }
-  
-  
-
-  
-  
-  
-
-  
-  
-  @IBAction func addMovieBtn(_ sender: Any) {
-    
-    if addNameMovie.text == "" {
-      let toast = Toast(text: "Vui lòng nhập Tên phim")
-      toast.show()
-      return
-    }
-    
-    let dfmatter = DateFormatter()
-    dfmatter.dateFormat="dd/MM/yyyy"
-    let date = dfmatter.date(from: addReleaseDate.text!)
-    let dateStamp:TimeInterval = date!.timeIntervalSince1970
-    let dateSt:Int = Int(dateStamp)
-    
-    let str = randomString(length: 5)
-    let url = URL(string: "https://cinema-hatin.herokuapp.com/api/cinema")
-    let parameter: [String: Any] = ["name": addNameMovie.text!, "genre": addGenreMovie.text!, "releaseDate": dateSt, "content": addContent.text!, "creatorId": SignInViewController.userDefault.string(forKey: "userNameID")!]
-    Alamofire.upload(multipartFormData: { (multipartFormData) in
-      for (key, value) in parameter {
-        multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
-      }
-      if let data = UIImageJPEGRepresentation(self.poster, 1.0) {
-        multipartFormData.append(data, withName: "file", fileName: str + ".jpeg", mimeType: "image/jpeg")
-      }
-    }, usingThreshold: UInt64.init(), to: url!, method: .post, headers: nil) { (result) in
-      switch result {
-      case .success(let upload, _, _) :
-        upload.responseJSON { response in
-          debugPrint(response)
-        }
-        upload.uploadProgress{ print("--->", $0.fractionCompleted)}
-        print("Success")
-        let toast = Toast(text: "Đã tạo phim thành công")
-        toast.show()
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let turnBackListMovieVC = storyboard.instantiateViewController(withIdentifier: "ViewController")
-        self.present(turnBackListMovieVC, animated: true, completion: nil)
-      case .failure(let encodingError):
-        print(encodingError)
-        print("Fail")
-      }
-    }
-  }
-  
-  @IBAction func editMovieBtn(_ sender: Any) {
-
-    
-    let dfmatter = DateFormatter()
-    dfmatter.dateFormat="dd/MM/yyyy"
-    let date = dfmatter.date(from: addReleaseDate.text!)
-    let dateStamp:TimeInterval = date!.timeIntervalSince1970
-    let dateSt:Int = Int(dateStamp)
-    
-    let str = randomString(length: 5)
-    let token = SignInViewController.userDefault.string(forKey: "token")
-    let url = URL(string: "https://cinema-hatin.herokuapp.com/api/cinema/edit")
-    let parameter: [String: Any] = ["name": addNameMovie.text!, "genre": addGenreMovie.text!, "releaseDate": dateSt, "content": addContent.text!, "creatorId": SignInViewController.userDefault.string(forKey: "userNameID")!, "id": dataInEdit._id]
-    let headers: HTTPHeaders = ["x-access-token": token!]
-    Alamofire.upload(multipartFormData: { (multipartFormData) in
-      for (key, value) in parameter {
-        multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
-      }
-      if let data = UIImageJPEGRepresentation(self.poster, 1.0) {
-        multipartFormData.append(data, withName: "file", fileName: str + ".jpeg", mimeType: "image/jpeg")
-      }
-    }, usingThreshold: UInt64.init(), to: url!, method: .post, headers: headers) { (result) in
-      switch result {
-      case .success(let upload, _, _) :
-        
-        upload.responseJSON { response in
-          debugPrint(response)
-          print(response)
-        }
-        
-        upload.uploadProgress{ print("--->", $0.fractionCompleted)}
-        print("Success")
-        let toast = Toast(text: "Đã sửa phim thành công")
-        toast.show()
-        self.performSegue(withIdentifier: "editSuccessMovie", sender: self)
-      case .failure(let encodingError):
-        print(encodingError)
-        print("Fail")
-      }
-    }
-  }
-  
   
   
   override func viewDidLoad() {
@@ -197,8 +79,9 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, HSDatePicke
   
   @objc func keyboardWillShow(notification: NSNotification) {
     if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
-      if self.view.frame.origin.y == 0{
-        self.view.frame.origin.y -= 258      }
+      if self.view.frame.origin.y == 0 {
+        self.view.frame.origin.y -= 258
+      }
     }
   }
   
@@ -227,13 +110,61 @@ class AddNewMovie: UIViewController, UINavigationControllerDelegate, HSDatePicke
     default:
       break
     }
-    
   }
   
+}
+
+
+///////////////////////////End Class/////////////////////////////////////////
+
+
+extension AddNewMovie: UIPickerViewDelegate {
   
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    addGenreMovie.text = listGenreMovie[row]
+  }
   
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    return listGenreMovie[row]
+  }
+}
+
+extension AddNewMovie: UIPickerViewDataSource {
   
+  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    return listGenreMovie.count
+  }
   
+  func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    return 1
+  }
+}
+
+extension AddNewMovie: UIImagePickerControllerDelegate {
+  
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+      addImgMovie.image = pickedImage
+      poster = pickedImage
+    }
+    dismiss(animated: true, completion: nil)
+  }
+}
+
+extension AddNewMovie: HSDatePickerViewControllerDelegate {
+  
+}
+
+extension AddNewMovie: UITextFieldDelegate {
+  
+}
+
+extension AddNewMovie: UINavigationControllerDelegate {
+  
+  @IBAction func turnBackListMovie(_ sender: Any) {
+    self.navigationController?.popViewController(animated: true)
+    self.dismiss(animated: true, completion: nil)
+  }
 }
 
 extension AddNewMovie {
@@ -253,7 +184,6 @@ extension AddNewMovie {
   }
   
 
-  
   func hsDatePickerPickedDate(_ date: Date!) {
     let formatterDay = DateFormatter()
     formatterDay.dateFormat = "dd/MM/yyyy"
@@ -283,24 +213,103 @@ extension AddNewMovie {
     self.view.endEditing(true)
   }
   
-  
+  // Turn off keyboard
   @IBAction func turnOffBtn(_ sender: Any) {
     genrePK.isHidden = true
     self.view.endEditing(true)
   }
   
+  // Pick a date
   @IBAction func datePK(_ sender: UITextField) {
     present(dateRelease, animated: true, completion: nil)
   }
-}
-
-extension AddNewMovie: UIImagePickerControllerDelegate {
   
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-    if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-      addImgMovie.image = pickedImage
-      poster = pickedImage
+  // 'Tạo phim' Button
+  @IBAction func addMovieBtn(_ sender: Any) {
+    
+    if addNameMovie.text == "" {
+      let toast = Toast(text: "Vui lòng nhập Tên phim")
+      toast.show()
+      return
     }
-    dismiss(animated: true, completion: nil)
+    
+    let dfmatter = DateFormatter()
+    dfmatter.dateFormat="dd/MM/yyyy"
+    let date = dfmatter.date(from: addReleaseDate.text!)
+    let dateStamp:TimeInterval = date!.timeIntervalSince1970
+    let dateSt:Int = Int(dateStamp)
+    
+    let str = randomString(length: 5)
+    let url = URL(string: "https://cinema-hatin.herokuapp.com/api/cinema")
+    let parameter: [String: Any] = ["name": addNameMovie.text!, "genre": addGenreMovie.text!, "releaseDate": dateSt, "content": addContent.text!, "creatorId": SignInViewController.userDefault.string(forKey: "userNameID")!]
+    Alamofire.upload(multipartFormData: { (multipartFormData) in
+      for (key, value) in parameter {
+        multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+      }
+      if let data = UIImageJPEGRepresentation(self.poster, 1.0) {
+        multipartFormData.append(data, withName: "file", fileName: str + ".jpeg", mimeType: "image/jpeg")
+      }
+    }, usingThreshold: UInt64.init(), to: url!, method: .post, headers: nil) { (result) in
+      switch result {
+      case .success(let upload, _, _) :
+        upload.responseJSON { response in
+          debugPrint(response)
+        }
+        upload.uploadProgress{ print("--->", $0.fractionCompleted)}
+        print("Success")
+        let toast = Toast(text: "Đã tạo phim thành công")
+        toast.show()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let turnBackListMovieVC = storyboard.instantiateViewController(withIdentifier: "ViewController")
+        self.present(turnBackListMovieVC, animated: true, completion: nil)
+      case .failure(let encodingError):
+        print(encodingError)
+        print("Fail")
+      }
+    }
+  }
+  
+  // 'Sửa phim' Button
+  @IBAction func editMovieBtn(_ sender: Any) {
+    
+    let dfmatter = DateFormatter()
+    dfmatter.dateFormat="dd/MM/yyyy"
+    let date = dfmatter.date(from: addReleaseDate.text!)
+    let dateStamp:TimeInterval = date!.timeIntervalSince1970
+    let dateSt:Int = Int(dateStamp)
+    
+    let str = randomString(length: 5)
+    let token = SignInViewController.userDefault.string(forKey: "token")
+    let url = URL(string: "https://cinema-hatin.herokuapp.com/api/cinema/edit")
+    let parameter: [String: Any] = ["name": addNameMovie.text!, "genre": addGenreMovie.text!, "releaseDate": dateSt, "content": addContent.text!, "creatorId": SignInViewController.userDefault.string(forKey: "userNameID")!, "id": dataInEdit._id]
+    let headers: HTTPHeaders = ["x-access-token": token!]
+    Alamofire.upload(multipartFormData: { (multipartFormData) in
+      for (key, value) in parameter {
+        multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+      }
+      if let data = UIImageJPEGRepresentation(self.poster, 1.0) {
+        multipartFormData.append(data, withName: "file", fileName: str + ".jpeg", mimeType: "image/jpeg")
+      }
+    }, usingThreshold: UInt64.init(), to: url!, method: .post, headers: headers) { (result) in
+      switch result {
+      case .success(let upload, _, _) :
+        
+        upload.responseJSON { response in
+          debugPrint(response)
+          print(response)
+        }
+        
+        upload.uploadProgress{ print("--->", $0.fractionCompleted)}
+        print("Success")
+        let toast = Toast(text: "Đã sửa phim thành công")
+        toast.show()
+        self.performSegue(withIdentifier: "editSuccessMovie", sender: self)
+      case .failure(let encodingError):
+        print(encodingError)
+        print("Fail")
+      }
+    }
   }
 }
+
+
