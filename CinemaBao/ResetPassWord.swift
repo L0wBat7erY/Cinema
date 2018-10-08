@@ -20,7 +20,7 @@ class ResetPassWord: UIViewController {
   @IBOutlet weak var newPassword: UITextField!
   @IBOutlet weak var confirmNewPassword: UITextField!
   
-  
+  // MARK: - View Did Load
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -49,17 +49,17 @@ class ResetPassWord: UIViewController {
 
 extension ResetPassWord {
   
-  // 'Back' Button
+  // MARK: - 'Back' Button
   @IBAction func returnUserVC(_ sender: Any) {
     self.dismiss(animated: true, completion: nil)
   }
   
-  // Turn Off keyboard
+  // MARK: - Turn off Keyboard
   @IBAction func turnOffKeyboard(_ sender: Any) {
     self.view.endEditing(true)
   }
   
-  // 'Xác nhận' Button
+  // MARK: - 'Xác nhận' Button
   @IBAction func confirmIsChane(_ sender: Any) {
     if oldPassword.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
       let toast = Toast(text: "Vui lòng nhập mật khẩu cũ")

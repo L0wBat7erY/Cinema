@@ -43,7 +43,7 @@ class ProfileViewController: UIViewController {
   }()
   
   
-  // Refresh Control
+  // MARK: - Refresh Control
   @objc func updateProfile (_ refreshControl: UIRefreshControl) {
     Alamofire.request(url!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: {(response) in
       switch response.result {
@@ -56,26 +56,14 @@ class ProfileViewController: UIViewController {
         SignInViewController.userDefault.set(info.name, forKey: "userName")
         self.lblUserName.text = info.name
         SignInViewController.userDefault.set(info.avatarURL, forKey: "avatarURL")
-        Alamofire.request("https://cinema-hatin.herokuapp.com" + info.avatarURL).responseImage(completionHandler: { (response) in
-          print(response)
-          
-          switch response.result {
-          case .success:
-            if let image = response.result.value {
-              DispatchQueue.main.async {
-                self.viewProfileDefault.image = image
-              }
-            }
-          case .failure:
-            print("Error")
-            return
-          }
-        })
+        
+        let urlImage = URL(string: "https://cinema-hatin.herokuapp.com" + info.avatarURL)
+        self.viewProfileDefault.sd_setImage(with: urlImage, placeholderImage: UIImage(named: "ProfileMovie"))
+        
       case .failure:
         print("Error")
       }
     })
-    
     
     fetchData()
     collectionViewMovie.reloadData()
@@ -83,7 +71,7 @@ class ProfileViewController: UIViewController {
   }
   
 
-  // View Did Load
+  // MARK: - View Did Load
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -156,7 +144,7 @@ class ProfileViewController: UIViewController {
 
 ///////////////////////////End Class/////////////////////////////////////////
 
-
+// MARK: - CollectionView Data Source
 extension ProfileViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -171,6 +159,7 @@ extension ProfileViewController: UICollectionViewDataSource {
   }
 }
 
+// MARK: - CollectionView Delegate
 extension ProfileViewController: UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -184,7 +173,7 @@ extension ProfileViewController: UICollectionViewDelegate {
   }
 }
 
-// Image picker Delegate
+// MARK: - Image picker Delegate
 extension ProfileViewController: UIImagePickerControllerDelegate {
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -227,7 +216,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate {
 
 extension ProfileViewController {
   
-  // create a random string
+  // MARK: - Function create a random string
   func randomString(length: Int) -> String {
     
     let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -243,7 +232,7 @@ extension ProfileViewController {
     return randomString
   }
   
-  // Delete userDefault
+  // MARK: - Delete userDefault
   func removeEverythingUserDefault() {
     SignInViewController.userDefault.removeObject(forKey: "token")
     SignInViewController.userDefault.removeObject(forKey: "userNameID")
@@ -252,7 +241,7 @@ extension ProfileViewController {
     SignInViewController.userDefault.removeObject(forKey: "password")
   }
   
-  // Call API get data movie
+  // MARK: - Call API get data movie
   func fetchData() {
     let idUserDefault = SignInViewController.userDefault.string(forKey: "userNameID")
     if let url = URL(string: "https://cinema-hatin.herokuapp.com/api/cinema") {
@@ -270,22 +259,22 @@ extension ProfileViewController {
 
 extension ProfileViewController: UINavigationControllerDelegate {
   
-  // 'Back' Button
+  // MARK: - 'Back' Button
   @IBAction func returnListMovieVC(_ sender: Any) {
     performSegue(withIdentifier: "goBackListMovie", sender: self)
   }
   
-  // 'Đổi mật khẩu' Button
+  // MARK: - 'Đổi mật khẩu' Button
   @IBAction func resetPasswordBtn(_ sender: Any) {
     self.performSegue(withIdentifier: "gotoResetPasswordVC", sender: self)
   }
   
-  // 'Tạo phim' Button
+  // MARK: - 'Tạo phim' Button
   @IBAction func createMovieInProfileVC(_ sender: Any) {
     self.performSegue(withIdentifier: "createMovieinUserVC", sender: self)
   }
   
-  // 'Chọn ảnh' Button
+  // MARK: - 'Chọn ảnh' Button
   @IBAction func addImageAvatar(_ sender: Any) {
     
     if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
@@ -300,7 +289,7 @@ extension ProfileViewController: UINavigationControllerDelegate {
     }
   }
   
-  // Edit name Button
+  // MARK: - Edit name Button
   @IBAction func changeNameBtn(_ sender: Any) {
     
     let alert = UIAlertController(title: "Name", message: "Bạn muốn đổi Username?", preferredStyle: .alert)
@@ -353,7 +342,7 @@ extension ProfileViewController: UINavigationControllerDelegate {
     
   }
   
-  // 'Đăng xuất' Button
+  // MARK: - 'Đăng xuất' Button
   @IBAction func logOutProfile(_ sender: Any) {
     
     let alert = UIAlertController(title: "Đăng xuất", message: "Bạn có muốn đăng xuất không?", preferredStyle: .alert)

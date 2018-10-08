@@ -39,6 +39,7 @@ class ListMovieViewCell: UITableViewCell {
     // Configure the view for the selected state
   }
   
+  // MARK: - Assign data in data of cell
   func setDatainCell(_ movie: Movie) {
     idPhim.text = movie.content
     theLoai.text = movie.genre
@@ -49,6 +50,7 @@ class ListMovieViewCell: UITableViewCell {
     profileMovie.sd_setImage(with: urlImage, placeholderImage: UIImage(named: "ProfileMovie"))
   }
   
+  // MARK: - Convert Timestamp to Human Date
   func convertTimestampToHumanDate(timestamp: Double) -> String {
     let date = Date(timeIntervalSince1970: timestamp)
     let formatterDate = DateFormatter()

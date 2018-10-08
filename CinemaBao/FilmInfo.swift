@@ -32,7 +32,7 @@ class FilmInfo: UIViewController {
   let urlDelete = "/api/cinema/delete"
   var segueID = ""
   
-  
+  // MARK: - View Did Load
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -81,6 +81,8 @@ class FilmInfo: UIViewController {
 ///////////////////////////End Class///////////////////////////////////////////////
 
 extension FilmInfo {
+  
+  //MARK: - Convert Timestamp to Human Date
   func convertTimestampToHumanDate(timestamp: Double) -> String {
     let date = Date(timeIntervalSince1970: timestamp)
     let formatterDate = DateFormatter()
@@ -92,20 +94,20 @@ extension FilmInfo {
 
 extension FilmInfo {
   
-  // 'Sửa' Button
+  // MARK: - 'Sửa' Button
   @IBAction func editMovieBtn(_ sender: Any) {
     self.performSegue(withIdentifier: "gotoFixDetailMovie", sender: self)
   }
   
-  // 'Back' Button
+  // MARK: - 'Back' Button
   @IBAction func backList(_ sender: Any) {
     dismiss(animated: true, completion: nil)
   }
   
-  // 'Xóa' Button
+  // MARK: - 'Xóa' Button
   @IBAction func deleteMovie(_ sender: Any) {
     
-    //Alert Notification
+    // Alert Notification
     let alert = UIAlertController(title: "Xóa phim", message: "Bạn có thật sự muốn xóa phim không?", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "Không", style: .destructive, handler: nil))
     alert.addAction(UIAlertAction(title: "Có", style: .default, handler: { action in

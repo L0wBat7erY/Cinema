@@ -18,6 +18,7 @@ class SendEmailResetPasswordVC: UIViewController {
   @IBOutlet weak var iconEmail: UIImageView!
   
 
+  // MARK: - View Did Load
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -46,6 +47,7 @@ class SendEmailResetPasswordVC: UIViewController {
 
 extension SendEmailResetPasswordVC {
   
+  // MARK: - Check valid Email
   func isValidEmail(testStr:String) -> Bool {
     let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
     let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
@@ -55,17 +57,17 @@ extension SendEmailResetPasswordVC {
 
 extension SendEmailResetPasswordVC {
   
-  // Turn off keyboard
+  // MARK: - Turn off keyboard
   @IBAction func turnOffKeyboard(_ sender: Any) {
     self.view.endEditing(true)
   }
   
-  // 'Back' Button
+  // MARK: - 'Back' Button
   @IBAction func gobackSignInVC(_ sender: Any) {
     self.dismiss(animated: true, completion: nil)
   }
   
-  // 'Gửi email' Button
+  // MARK: - 'Gửi email' Button
   @IBAction func sendEmailBtn(_ sender: Any) {
     if txtEmailinResetPasswordVC.text?.trimmingCharacters(in: .whitespaces).count == 0 {
       let toast = Toast(text: "Vui lòng nhập Email")

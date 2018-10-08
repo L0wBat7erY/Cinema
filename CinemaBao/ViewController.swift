@@ -39,7 +39,7 @@ class ViewController: UIViewController {
     refreshControl.endRefreshing()
   }
   
-  // View Did Load
+  // MARK: - View Did Load
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -94,7 +94,7 @@ class ViewController: UIViewController {
     
   }
   
-//   View will Appear
+  // MARK: - View will Appear
   override func viewWillAppear(_ animated: Bool) {
     fetchData()
     tableView.reloadData()
@@ -112,12 +112,12 @@ class ViewController: UIViewController {
 // Action in View Controller
 extension ViewController {
   
-  // Press Back button
+  // MARK: - Press Back button
   @IBAction func gotoProfile(_ sender: Any) {
     self.performSegue(withIdentifier: "gotoDetailUser", sender: self)
   }
   
-  //Press 'Tạo phim' button go to View 'Danh sách phim'
+  // MARK: - Press 'Tạo phim' button go to View 'Danh sách phim'
   @IBAction func addNewMovieBtn(_ sender: Any) {
     
     if SignInViewController.userDefault.string(forKey: "token") == nil {
@@ -138,7 +138,7 @@ extension ViewController {
     }
   }
   
-  //Button turn off keyboard display when typing
+  // MARK: - Button turn off keyboard display when typing
   @IBAction func turnOffKeyboard(_ sender: Any) {
     self.view.endEditing(true)
   }
@@ -179,7 +179,7 @@ extension ViewController: UITableViewDelegate {
   }
 }
 
-//Define Search bar
+// MARK: - Define Search bar Delegate
 extension ViewController: UISearchBarDelegate {
   
 }
@@ -187,7 +187,7 @@ extension ViewController: UISearchBarDelegate {
 // Function implement in Class View Controller
 extension ViewController {
   
-  //Search Bar
+  // MARK: - Search Bar
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     if searchBar.text == "" || searchBar.text == nil {
       searchIsTrue = false
@@ -195,7 +195,7 @@ extension ViewController {
     }
     else {
       searchIsTrue = true
-      for phim in danhsachphim {
+      for _ in danhsachphim {
         listMovietoSearch = danhsachphim.filter({ (phim) -> Bool in
           return phim.name.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil).contains(searchText.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil)) || phim.genre.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil).contains(searchText.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil))  || phim.content.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil).contains(searchText.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil)) || convertTimestampToHumanDate(timestamp: phim.releaseDate).folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil).contains(searchText.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil))
         })
@@ -205,7 +205,7 @@ extension ViewController {
   }
   
   // Call API and get the List Movie (Assign 'danhsachphim' with 'List Movie returned') and reload Data TableView
-  // Get data from API
+  // MARK: - Get data from API
   func fetchData() {
     if let url = URL(string: "https://cinema-hatin.herokuapp.com/api/cinema") {
       ApiCall.getListMovies(url: url) { (movies) in
@@ -215,7 +215,7 @@ extension ViewController {
     }
   }
   
-  // Convert Timestamp to Human Date
+  // MARK: - Convert Timestamp to Human Date
   func convertTimestampToHumanDate(timestamp: Double) -> String {
     let date = Date(timeIntervalSince1970: timestamp)
     let formatterDate = DateFormatter()

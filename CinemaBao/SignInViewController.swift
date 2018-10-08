@@ -21,6 +21,7 @@ class SignInViewController: UIViewController {
   @IBOutlet weak var txtPasswordSignIN: UITextField!
   
   
+  // MARK: - View Did Load
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -57,7 +58,7 @@ class SignInViewController: UIViewController {
 
 extension SignInViewController{
   
-  // 'Đăng nhập' Button
+  // MARK: - 'Đăng nhập' Button
   @IBAction func loginSuccessListMovie(_ sender: Any) {
     
     if txtEmailSignIn.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
@@ -113,22 +114,22 @@ extension SignInViewController{
     })
   }
   
-  //Press display turn off Keyboard
+  // MARK: - Turn off Keyboard
   @IBAction func turnOffBoard(_ sender: Any) {
     self.view.endEditing(true)
   }
   
-  // 'Đăng ký' Button
+  // MARK: - 'Đăng ký' Button
   @IBAction func signupBtn(_ sender: Any) {
     self.performSegue(withIdentifier: "gotoSignUpVC", sender: self)
   }
   
-  // 'Quên mật khẩu' Button
+  // MARK: - 'Quên mật khẩu' Button
   @IBAction func resetPasswordSignIn(_ sender: Any) {
     self.performSegue(withIdentifier: "forgetPassword", sender: self)
   }
   
-  // 'Back' Button
+  // MARK: - 'Back' Button
   @IBAction func gobackListMovieNoSignIn(_ sender: Any) {
     self.performSegue(withIdentifier: "gobackListMovienoSignIn", sender: nil)
   }
@@ -136,6 +137,7 @@ extension SignInViewController{
 
 extension SignInViewController {
   
+  // MARK: - Check valid Email
   func isValidEmail(testStr:String) -> Bool {
     let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
     let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)

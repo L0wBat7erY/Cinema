@@ -129,16 +129,9 @@
 				9A0F2B7D21588A0D000529D5 /* ListMovieViewCell.swift */,
 				9A0F2B7F21588C5C000529D5 /* SignInViewController.swift */,
 				9A0F2B8121588CAD000529D5 /* SignUpViewController.swift */,
-				9A0F2B852158CC76000529D5 /* FilmList.swift */,
-				9A0F2B872158CC8E000529D5 /* Movie.swift */,
-				9A0F2B892158CCA2000529D5 /* UserInfo.swift */,
 				9ABB5069215A793B00A79740 /* AddNewMovie.swift */,
 				9ABB506B215A79E100A79740 /* FilmInfo.swift */,
 				9ABB506D215A8B7E00A79740 /* ResetPassWord.swift */,
-				9A121A79215BE36200F125EB /* GetToken.swift */,
-				9AA88A76215C66E8002CF999 /* ListInfoSignUp.swift */,
-				9A6AFE1C215D2F92003D6C6D /* CreateCinema.swift */,
-				9A6AFE1E215D2FF1003D6C6D /* DataCinemaCreatedReturn.swift */,
 				9A3CC3B9215E8811004B8DEF /* ProfileViewController.swift */,
 				9AB6A796216080F700220C7C /* SendEmailResetPasswordVC.swift */,
 				9AB6A79821609B5E00220C7C /* EditMovieViewController.swift */,
@@ -167,6 +160,13 @@
 		9AE104082161C81F0073EFB4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9A0F2B852158CC76000529D5 /* FilmList.swift */,
+				9A121A79215BE36200F125EB /* GetToken.swift */,
+				9A6AFE1E215D2FF1003D6C6D /* DataCinemaCreatedReturn.swift */,
+				9AA88A76215C66E8002CF999 /* ListInfoSignUp.swift */,
+				9A0F2B892158CCA2000529D5 /* UserInfo.swift */,
+				9A6AFE1C215D2F92003D6C6D /* CreateCinema.swift */,
+				9A0F2B872158CC8E000529D5 /* Movie.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

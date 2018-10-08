@@ -35,6 +35,7 @@ class AddNewMovie: UIViewController  {
   @IBOutlet weak var editMoviebtn: UIButton!
   
   
+  // MARK: - View Did Load
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -117,7 +118,7 @@ class AddNewMovie: UIViewController  {
 
 ///////////////////////////End Class/////////////////////////////////////////
 
-
+// MARK: - Picker View Delegate
 extension AddNewMovie: UIPickerViewDelegate {
   
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -129,6 +130,7 @@ extension AddNewMovie: UIPickerViewDelegate {
   }
 }
 
+// MARK: - Picker View DataSource
 extension AddNewMovie: UIPickerViewDataSource {
   
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -140,6 +142,7 @@ extension AddNewMovie: UIPickerViewDataSource {
   }
 }
 
+// MARK: - Picker Image Picker Delegate
 extension AddNewMovie: UIImagePickerControllerDelegate {
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -151,14 +154,17 @@ extension AddNewMovie: UIImagePickerControllerDelegate {
   }
 }
 
+// MARK: - Date Picker Delegate
 extension AddNewMovie: HSDatePickerViewControllerDelegate {
   
 }
 
+// MARK: - Text Field Delegate
 extension AddNewMovie: UITextFieldDelegate {
   
 }
 
+// MARK: - Navigation Controller Delegate
 extension AddNewMovie: UINavigationControllerDelegate {
   
   @IBAction func turnBackListMovie(_ sender: Any) {
@@ -169,6 +175,7 @@ extension AddNewMovie: UINavigationControllerDelegate {
 
 extension AddNewMovie {
   
+  // MARK: - Function create random String
   func randomString(length: Int) -> String {
     
     let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -183,7 +190,8 @@ extension AddNewMovie {
     return randomString
   }
   
-
+  
+  //MARK: - Implement Date Piker
   func hsDatePickerPickedDate(_ date: Date!) {
     let formatterDay = DateFormatter()
     formatterDay.dateFormat = "dd/MM/yyyy"
@@ -194,7 +202,7 @@ extension AddNewMovie {
 
 extension AddNewMovie {
   
-  // 'Chọn ảnh' Button
+  // MARK: - 'Chọn ảnh' Button
   @IBAction func chooseImgBtn(_ sender: Any) {
     if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
       print("Button capture")
@@ -207,24 +215,24 @@ extension AddNewMovie {
     }
   }
   
-  // When input Genre textfield
+  // MARK: - Hidden View Picker
   @IBAction func addGenreMovie(_ sender: UITextField) {
     genrePK.isHidden = false
     self.view.endEditing(true)
   }
   
-  // Turn off keyboard
+  // MARK: - Turn off keyboard
   @IBAction func turnOffBtn(_ sender: Any) {
     genrePK.isHidden = true
     self.view.endEditing(true)
   }
   
-  // Pick a date
+  // MARK: - Pick a date
   @IBAction func datePK(_ sender: UITextField) {
     present(dateRelease, animated: true, completion: nil)
   }
   
-  // 'Tạo phim' Button
+  // MARK: - 'Tạo phim' Button
   @IBAction func addMovieBtn(_ sender: Any) {
     
     if addNameMovie.text == "" {
@@ -269,7 +277,7 @@ extension AddNewMovie {
     }
   }
   
-  // 'Sửa phim' Button
+  // MARK: - 'Sửa phim' Button
   @IBAction func editMovieBtn(_ sender: Any) {
     
     let dfmatter = DateFormatter()

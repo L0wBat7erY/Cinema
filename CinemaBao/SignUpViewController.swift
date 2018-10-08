@@ -23,7 +23,7 @@ class SignUpViewController: UIViewController {
   @IBOutlet weak var iconPasswordSignUp: UIImageView!
   @IBOutlet weak var iconConfirmSignUp: UIImageView!
   
-  
+  // MARK: - View Did Load
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -61,7 +61,7 @@ class SignUpViewController: UIViewController {
 
 extension SignUpViewController{
   
-  //Check Email valid
+  // MARK: - Check valid Email
   func isValidEmail(testStr:String) -> Bool {
     let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
     
@@ -72,14 +72,17 @@ extension SignUpViewController{
 
 extension SignUpViewController {
   
+  // MARK: - 'Đăng nhập' Button
   @IBAction func signInBtn(_ sender: Any) {
     self.performSegue(withIdentifier: "gotoSignInVC", sender: self)
   }
   
+  // MARK: - Turn off Keyboard
   @IBAction func turnoffKeyboardBtn(_ sender: Any) {
     self.view.endEditing(true)
   }
   
+  // MARK: - 'Đăng ký' Button
   @IBAction func signUpBtn(_ sender: Any) {
     
     if txtUsernameSignUp.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
@@ -127,7 +130,7 @@ extension SignUpViewController {
           let toast = Toast(text: "Đăng ký thành công")
           toast.show()
           
-          // Save token, Email, ID user, Name User, password
+          // MARK: - Save token, Email, ID user, Name User, password
           SignInViewController.userDefault.set(info.token, forKey: "token")
           SignInViewController.userDefault.set(info.user._id, forKey: "userNameID")
           SignInViewController.userDefault.set(info.user.name, forKey: "userName")
